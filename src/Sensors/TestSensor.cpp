@@ -10,7 +10,7 @@
  **************************************************************/
 #include "Sensors/TestSensor.h"
 
-TestSensor::TestSensor()
+TestSensor::TestSensor(int testVal) : _localVal(testVal)
 {
 }
 
@@ -20,7 +20,7 @@ TestSensor::~TestSensor()
 
 bool TestSensor::startMeasurement()
 {
-    this->_sensorValue = int(5);
+    this->_sensorValue = this->_localVal;
     return true;
 }
 

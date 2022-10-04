@@ -9,7 +9,7 @@
  *
  **************************************************************/
 #pragma once
-#include <iostream>
+#include <Arduino.h>
 
 /**************************************************************
  * @brief Sensor base class
@@ -42,8 +42,8 @@ public:
          * @param name Sensor name
          * @param instance Sensor implementation instance
          **************************************************************/
-        Sensor(std::string name, SensorBase *instance) : sensorName(name), sensor(instance) {}
-        std::string sensorName; /*< Sensor registration name */
+        Sensor(String name, SensorBase *instance) : sensorName(name), sensor(instance) {}
+        String sensorName; /*< Sensor registration name */
         SensorBase *sensor;     /*< Sensor instance */
     };
 

@@ -14,5 +14,6 @@
 // Measurement time settings
 #define uS_TO_S_FACTOR 1000000           /* Conversion factor for micro seconds to seconds */
 #define TIME_TO_SLEEP 10                 /* Time ESP32 will go to sleep (in seconds) */
-#define WEBSERVER_URL "http://test.net/" /*< Webserver URL base for data transport to database */
+#define WEBSERVER_URL "https://httpbin.org/post" /*< Webserver URL base for data transport to database */
 #define POST_CONTEXT_TYPE "text/plain"   /*< Data contect type for POST */
+#define JSON_POST_DOC_SIZE 1024          /*< Size of DynamicJsonDocument */

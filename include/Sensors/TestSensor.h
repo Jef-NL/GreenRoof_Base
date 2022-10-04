@@ -18,7 +18,7 @@ public:
      * @brief Construct a new Test Sensor object
      * 
      **************************************************************/
-    TestSensor();
+    TestSensor(int testVal);
 
     /**************************************************************
      * @brief Destroy the Test Sensor object
@@ -43,5 +43,6 @@ public:
     int getMeasurementResult() override;
 
 private:
+    int _localVal;  /*< Local test value */
 };
 

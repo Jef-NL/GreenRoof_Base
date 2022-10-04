@@ -9,12 +9,17 @@
  *
  **************************************************************/
 #pragma once
+#include <Arduino.h>
 #include <WiFi.h>
 #include <HTTPClient.h>
-#include <iostream>
+#include <time.h>
+#include <ArduinoJson.h>
 
 #include "Settings/config.h"
 #include "DataObject.h"
+
+#define NTP_SERVER "ch.pool.ntp.org"
+#define TZ_INFO "CET-1CEST-2,M3.5.0/02:00:00,M10.5.0/03:00:00" // enter your time zone (https://remotemonitoringsystems.ca/time-zone-abbreviations.php)
 
 /**************************************************************
  * @brief Wireless data parser and publisher
@@ -84,7 +89,7 @@ public:
      * @param fieldName Name of datafield
      * @param fieldValue Value
      **************************************************************/
-    void addData(std::string fieldName, int fieldValue);
+    void addData(String fieldName, int fieldValue);
 
     /**************************************************************
      * @brief Send data to network
@@ -93,13 +98,6 @@ public:
      * @return false Data send has failed.
      **************************************************************/
     bool sendData();
-
-    /**************************************************************
-     * @brief Format raw data to single sendable string
-     *
-     * @return std::string Parsed string
-     **************************************************************/
-    std::string parseData();
 
 private:
     /**************************************************************
@@ -114,9 +112,39 @@ private:
      **************************************************************/
     virtual ~DataPublisher();
 
-    bool _connected;         /*< Connections status */
-    bool _disconnected;      /*< Disconnected during process */
-    DataObject *_rawData;    /*< Raw data in struct */
-    std::string _parsedData; /*< Parsed data in string */
-    HTTPClient _httpClient;  /*< Http Client instance for POST */
+    /**************************************************************
+     * @brief Send HTTP post to server with sensor data
+     *
+     * @return true Post was send successfully
+     * @return false Post has failed to send
+     **************************************************************/
+    bool sendHTTPPost();
+
+    /**************************************************************
+     * @brief Format raw data to single sendable string
+     *
+     * @return String Parsed string
+     **************************************************************/
+    String parseData();
+
+    /**************************************************************
+     * @brief Update the current Timestamp for a measurement
+     *
+     * @return time_t Timestamp in seconds since 1 Jan 1970 UTC
+     **************************************************************/
+    time_t updateTimestamp();
+
+    /**************************************************************
+     * @brief Helper print function
+     *
+     * @param localTime Timestamp to print
+     **************************************************************/
+    void showTime(tm localTime);
+
+    bool _connected;        /*< Connections status */
+    bool _disconnected;     /*< Disconnected during process */
+    DataObject *_rawData;   /*< Raw data in struct */
+    String _parsedData;     /*< Parsed data in string */
+    HTTPClient _httpClient; /*< Http Client instance for POST */
+    time_t _lastTimestamp;  /*< Timestamp of last measurement */
 };

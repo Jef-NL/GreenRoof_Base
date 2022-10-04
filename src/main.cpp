@@ -24,7 +24,9 @@ void setup()
   controller = new MeasurementController();
 
   // Add sensors
-  controller->addSensor(new SensorBase::Sensor("TestSens", new TestSensor()));
+  controller->addSensor(new SensorBase::Sensor("TestSens1", new TestSensor(5)));
+  controller->addSensor(new SensorBase::Sensor("TestSens2", new TestSensor(3)));
+  controller->addSensor(new SensorBase::Sensor("TestSens3", new TestSensor(4)));
 
   // Run measurements
   controller->runProcess();
@@ -35,39 +37,11 @@ void setup()
   esp_deep_sleep_start();
 }
 
+/**************************************************************
+ * @brief Loop function
+ * 
+ * Not in use due to deepsleep reset
+ **************************************************************/
 void loop()
 {
-
-  // if (WiFi.status() == WL_CONNECTED)
-  // { 
-  //   // Check WiFi connection status
-  //   HTTPClient http;
-
-  //   http.begin("http://jsonplaceholder.typicode.com/posts"); // Specify destination for HTTP request
-  //   http.addHeader("Content-Type", "text/plain");            // Specify content-type header
-
-  //   int httpResponseCode = http.POST("POSTING from ESP32"); // Send the actual POST request
-
-  //   if (httpResponseCode > 0)
-  //   {
-  //     String response = http.getString(); // Get the response to the request
-
-  //     Serial.println(httpResponseCode); // Print return code
-  //     Serial.println(response);         // Print request answer
-  //   }
-  //   else
-  //   {
-
-  //     Serial.print("Error on sending POST: ");
-  //     Serial.println(httpResponseCode);
-  //   }
-
-  //   http.end(); // Free resources
-  // }
-  // else
-  // {
-  //   Serial.println("Error in WiFi connection");
-  // }
-
-  // delay(10000); // Send a request every 10 seconds
 }

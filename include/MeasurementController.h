@@ -9,6 +9,7 @@
  *
  **************************************************************/
 #pragma once
+#include <Arduino.h>
 #include <vector>
 
 #include "DataObject.h"

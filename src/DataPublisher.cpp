@@ -10,7 +10,7 @@
  **************************************************************/
 #include "DataPublisher.h"
 
-DataPublisher::DataPublisher() : _connected(false), _disconnected(false), _parsedData("")
+DataPublisher::DataPublisher() : _connected(false), _disconnected(false), _parsedData(""), _lastTimestamp(0L)
 {
 }
 
@@ -77,7 +77,7 @@ void DataPublisher::setData(DataObject data)
     _rawData = &data;
 }
 
-void DataPublisher::addData(std::string fieldName, int fieldValue)
+void DataPublisher::addData(String fieldName, int fieldValue)
 {
     if (_rawData == nullptr)
     {
@@ -97,21 +97,92 @@ bool DataPublisher::sendData()
     while (!this->wirelessGetConnected() && !this->_disconnected)
         delayMicroseconds(10);
 
+    // Update timestamp for measurement
+    this->updateTimestamp();
+
     if (this->_disconnected)
     {
         Serial.println("Connecting failed, Got disconnected...");
+        // ToDo: Store data in memory
         return false;
     }
 
-    // ToDo: Parse and send data using HTTP POST
+    // Send HTTP post
+    this->sendHTTPPost();
 
     // Clear data after it has been sended
     delete _rawData;
     return true;
 }
 
-std::string DataPublisher::parseData()
+bool DataPublisher::sendHTTPPost()
 {
-    // ToDo: Parse data from DataObject to Json string
-    return std::string();
+    _httpClient.begin(String(WEBSERVER_URL));
+    _httpClient.addHeader("Content-Type", String(POST_CONTEXT_TYPE));
+
+    int response = _httpClient.POST(this->parseData());
+    _httpClient.end();
+
+    switch (response)
+    {
+    case HTTP_CODE_OK:
+        Serial.printf("[HTTP] Success %d\n", response);
+        return true;
+        break;
+        // ToDo: Handle error responses
+    default:
+        Serial.printf("Unhandled HTTP response: %d\n", response);
+        break;
+    }
+
+    return false;
+}
+
+String DataPublisher::parseData()
+{
+    DynamicJsonDocument doc(JSON_POST_DOC_SIZE);
+
+    // Add timestamp
+    doc[String("timestamp")] = this->_lastTimestamp;
+
+    // Add sensor data
+    for (auto entry : this->_rawData->items) 
+    {
+        // Add measurement
+        doc[entry->fieldName.c_str()] = entry->fieldValue;
+    }
+
+    // Json to string
+    serializeJson(doc, _parsedData);
+
+    // DEBUG
+    Serial.println(_parsedData);
+
+    return String(_parsedData);
+}
+
+time_t DataPublisher::updateTimestamp()
+{
+    // Configure NTP
+    configTime(0, 0, NTP_SERVER);
+    setenv("TZ", TZ_INFO, 1);
+
+    // Get current time
+    tm time;
+    getLocalTime(&time);
+    this->showTime(time);
+
+    _lastTimestamp = mktime(&time);
+    return _lastTimestamp;
+}
+
+void DataPublisher::showTime(tm localTime)
+{
+    Serial.printf("%02d-%02d-%04d %02d:%02d:%02d\n",
+                  localTime.tm_mday,
+                  localTime.tm_mon + 1,
+                  localTime.tm_year + 1900,
+                  localTime.tm_hour,
+                  localTime.tm_min,
+                  localTime.tm_sec);
 }

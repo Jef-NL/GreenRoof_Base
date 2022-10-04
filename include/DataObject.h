@@ -9,7 +9,7 @@
  *
  **************************************************************/
 #pragma once
-#include <iostream>
+#include <Arduino.h>
 #include <vector>
 
 /**************************************************************
@@ -25,10 +25,10 @@ struct DataEntry
      * @param name Field name
      * @param value Field data
      **************************************************************/
-    DataEntry(std::string name, int value) : fieldName(name), fieldValue(value){};
+    DataEntry(String name, int value) : fieldName(name), fieldValue(value){};
 
-    std::string fieldName; /*< Field name string */
-    int fieldValue;        /*< Field data int */
+    String fieldName; /*< Field name string */
+    int16_t fieldValue;    /*< Field data int */
 };
 
 /**************************************************************
