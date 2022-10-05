@@ -1,4 +1,4 @@
-/**************************************************************
+/**
  * @file TestSensor.cpp
  * @author Jef B (hj.baars@student.avans.nl)
  * @brief Test sensor class
@@ -7,7 +7,7 @@
  *
  * @copyright Copyright (c) 2022
  *
- **************************************************************/
+ **/
 #include "Sensors/TestSensor.h"
 
 TestSensor::TestSensor(int testVal) : _localVal(testVal)

@@ -1,4 +1,4 @@
-/**************************************************************
+/**
  * @file config.h
  * @author Jef B (hj.baars@student.avans.nl)
  * @brief System configuration
@@ -7,7 +7,7 @@
  *
  * @copyright Copyright (c) 2022
  *
- **************************************************************/
+ **/
 #pragma once
 #include "keys.h"
 

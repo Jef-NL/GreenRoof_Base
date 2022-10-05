@@ -1,4 +1,4 @@
-/**************************************************************
+/**
  * @file DataPublisher.cpp
  * @author Jef B (hj.baars@student.avans.nl)
  * @brief Data parser and management for transmission and storage of sensor data
@@ -7,7 +7,7 @@
  *
  * @copyright Copyright (c) 2022
  *
- **************************************************************/
+ **/
 #include "DataPublisher.h"
 
 DataPublisher::DataPublisher() : _connected(false), _disconnected(false), _parsedData(""), _lastTimestamp(0L)

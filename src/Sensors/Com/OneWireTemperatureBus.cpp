@@ -1,4 +1,4 @@
-/**************************************************************
+/**
  * @file OneWireTemperatureBus.cpp
  * @author Jef B (hj.baars@student.avans.nl)
  * @brief Class for shared bus instance of temperature bus
@@ -7,7 +7,7 @@
  *
  * @copyright Copyright (c) 2022
  *
- **************************************************************/
+ **/
 #include "Sensors/Com/OneWireTemperatureBus.h"
 
 OneWireTemperatureBus::OneWireTemperatureBus(uint8_t busPin) : _deviceCount(0), _lastMeasurementStamp(0)

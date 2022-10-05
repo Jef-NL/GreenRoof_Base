@@ -1,4 +1,4 @@
-/**************************************************************
+/**
  * @file main.cpp
  * @author Jef B (hj.baars@student.avans.nl)
  * @brief Main runnable
@@ -7,7 +7,7 @@
  * 
  * @copyright Copyright (c) 2022
  * 
- **************************************************************/
+ **/
 
 #include <Arduino.h>
 #include <WiFi.h>
@@ -26,10 +26,10 @@ MeasurementController *controller;
 // One Wire shared temperature bus
 OneWireTemperatureBus *sharedBus;
 
-/**************************************************************
+/**
  * @brief Single run function on startup
  * 
- **************************************************************/
+ **/
 void setup()
 {
   // Start serial communication
@@ -55,11 +55,11 @@ void setup()
   esp_deep_sleep_start();
 }
 
-/**************************************************************
+/**
  * @brief Loop function
  * 
  * Not in use due to deepsleep reset
- **************************************************************/
+ **/
 void loop()
 {
 }

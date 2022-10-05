@@ -1,4 +1,4 @@
-/**************************************************************
+/**
  * @file MeasurementController.cpp
  * @author Jef B (hj.baars@student.avans.nl)
  * @brief Main measurement and communication controller
@@ -7,7 +7,7 @@
  *
  * @copyright Copyright (c) 2022
  *
- **************************************************************/
+ **/
 #include "MeasurementController.h"
 
 MeasurementController::MeasurementController()

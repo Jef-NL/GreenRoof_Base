@@ -1,4 +1,4 @@
-/**************************************************************
+/**
  * @file DS18B20Sensor.cpp
  * @author Jef B (hj.baars@student.avans.nl)
  * @brief Temperature sensor class
@@ -7,7 +7,7 @@
  *
  * @copyright Copyright (c) 2022
  *
- **************************************************************/
+ **/
 #include "Sensors/DS18B20Sensor.h"
 
 DS18B20Sensor::DS18B20Sensor(OneWireTemperatureBus *sharedBus) : _sharedBus(sharedBus), _busAddress(UINT64_MAX)
