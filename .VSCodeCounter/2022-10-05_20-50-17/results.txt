@@ -1,0 +1,47 @@
+Date : 2022-10-05 20:50:17
+Directory : d:\OneDrive - Avans Hogeschool\Minor\PRO Smart Roofs\Software\GreenRoof_Base
+Total : 15 files,  484 codes, 459 comments, 161 blanks, all 1104 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| C++      |         14 |        475 |        450 |        159 |      1,084 |
+| Ini      |          1 |          9 |          9 |          2 |         20 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                     | files      | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                        |         15 |        484 |        459 |        161 |      1,104 |
+| include                                                                                                                  |          8 |        157 |        361 |         72 |        590 |
+| include\Sensors                                                                                                          |          4 |         74 |        173 |         34 |        281 |
+| include\Sensors\Com                                                                                                      |          1 |         24 |         58 |         12 |         94 |
+| include\Settings                                                                                                         |          1 |         10 |         13 |          3 |         26 |
+| src                                                                                                                      |          6 |        318 |         89 |         87 |        494 |
+| src\Sensors                                                                                                              |          3 |        105 |         36 |         33 |        174 |
+| src\Sensors\Com                                                                                                          |          1 |         59 |         16 |         21 |         96 |
++--------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                                                 | language | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| d:\OneDrive - Avans Hogeschool\Minor\PRO Smart Roofs\Software\GreenRoof_Base\include\DataObject.h                        | C++      |         13 |         26 |          4 |         43 |
+| d:\OneDrive - Avans Hogeschool\Minor\PRO Smart Roofs\Software\GreenRoof_Base\include\DataPublisher.h                     | C++      |         38 |         93 |         20 |        151 |
+| d:\OneDrive - Avans Hogeschool\Minor\PRO Smart Roofs\Software\GreenRoof_Base\include\MeasurementController.h             | C++      |         22 |         56 |         11 |         89 |
+| d:\OneDrive - Avans Hogeschool\Minor\PRO Smart Roofs\Software\GreenRoof_Base\include\Sensors\Com\OneWireTemperatureBus.h | C++      |         24 |         58 |         12 |         94 |
+| d:\OneDrive - Avans Hogeschool\Minor\PRO Smart Roofs\Software\GreenRoof_Base\include\Sensors\DS18B20Sensor.h             | C++      |         18 |         41 |          8 |         67 |
+| d:\OneDrive - Avans Hogeschool\Minor\PRO Smart Roofs\Software\GreenRoof_Base\include\Sensors\SensorBase.h                | C++      |         19 |         45 |          7 |         71 |
+| d:\OneDrive - Avans Hogeschool\Minor\PRO Smart Roofs\Software\GreenRoof_Base\include\Sensors\TestSensor.h                | C++      |         13 |         29 |          7 |         49 |
+| d:\OneDrive - Avans Hogeschool\Minor\PRO Smart Roofs\Software\GreenRoof_Base\include\Settings\config.h                   | C++      |         10 |         13 |          3 |         26 |
+| d:\OneDrive - Avans Hogeschool\Minor\PRO Smart Roofs\Software\GreenRoof_Base\platformio.ini                              | Ini      |          9 |          9 |          2 |         20 |
+| d:\OneDrive - Avans Hogeschool\Minor\PRO Smart Roofs\Software\GreenRoof_Base\src\DataPublisher.cpp                       | C++      |        135 |         23 |         31 |        189 |
+| d:\OneDrive - Avans Hogeschool\Minor\PRO Smart Roofs\Software\GreenRoof_Base\src\MeasurementController.cpp               | C++      |         50 |         13 |         14 |         77 |
+| d:\OneDrive - Avans Hogeschool\Minor\PRO Smart Roofs\Software\GreenRoof_Base\src\Sensors\Com\OneWireTemperatureBus.cpp   | C++      |         59 |         16 |         21 |         96 |
+| d:\OneDrive - Avans Hogeschool\Minor\PRO Smart Roofs\Software\GreenRoof_Base\src\Sensors\DS18B20Sensor.cpp               | C++      |         30 |         10 |          7 |         47 |
+| d:\OneDrive - Avans Hogeschool\Minor\PRO Smart Roofs\Software\GreenRoof_Base\src\Sensors\TestSensor.cpp                  | C++      |         16 |         10 |          5 |         31 |
+| d:\OneDrive - Avans Hogeschool\Minor\PRO Smart Roofs\Software\GreenRoof_Base\src\main.cpp                                | C++      |         28 |         17 |          9 |         54 |
+| Total                                                                                                                    |          |        484 |        459 |        161 |      1,104 |
++--------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+

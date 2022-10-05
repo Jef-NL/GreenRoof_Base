@@ -1,7 +1,7 @@
 /**************************************************************
  * @file TestSensor.h
  * @author Jef B (hj.baars@student.avans.nl)
- * @brief 
+ * @brief Test sensor class
  * @version 0.1
  * @date 2022-10-03
  * 
@@ -38,11 +38,11 @@ public:
     /**************************************************************
      * @brief Get the measurement results
      *
-     * @return int Sensor value
+     * @return uint16_t Sensor value
      **************************************************************/
-    int getMeasurementResult() override;
+    uint16_t getMeasurementResult() override;
 
 private:
-    int _localVal;  /*< Local test value */
+    uint16_t _localVal;  /*< Local test value */
 };
 

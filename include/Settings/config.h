@@ -17,3 +17,10 @@
 #define WEBSERVER_URL "https://httpbin.org/post" /*< Webserver URL base for data transport to database */
 #define POST_CONTEXT_TYPE "text/plain"   /*< Data contect type for POST */
 #define JSON_POST_DOC_SIZE 1024          /*< Size of DynamicJsonDocument */
+
+// Temperature sensor DS18B20
+#define ONE_WIRE_BUS 4
+#define MEASUREMENT_VALID_MS 1000
+#define TEMPERATURE_MULTIPLICATION 100
+
+//Sens Address: 4035225328881985576 Address: 504403221035971880

@@ -1,9 +1,9 @@
 /**************************************************************
- * @file SensorBase.h
+ * @file Ds18B20Sensor.h
  * @author Jef B (hj.baars@student.avans.nl)
- * @brief Sensor base object Interface
+ * @brief Temperature sensor class
  * @version 0.1
- * @date 2022-10-03
+ * @date 2022-10-05
  *
  * @copyright Copyright (c) 2022
  *
@@ -11,60 +11,56 @@
 #pragma once
 #include <Arduino.h>
 
+#include "Settings/config.h"
+#include "SensorBase.h"
+#include "Sensors/Com/OneWireTemperatureBus.h"
+
 /**************************************************************
- * @brief Sensor base class
+ * @brief One wire temperature sensor implementation
  *
  **************************************************************/
-class SensorBase
+class DS18B20Sensor : public SensorBase
 {
 public:
     /**************************************************************
-     * @brief Default constructor
+     * @brief Construct a new DS18B20Sensor object
      *
+     * Constructor for use with single sensor only.
+     * @param sharedBus Shared OneWire bus for multiple sensors
      **************************************************************/
-    SensorBase() = default;
+    DS18B20Sensor(OneWireTemperatureBus *sharedBus);
 
     /**************************************************************
-     * @brief Default destructor
+     * @brief Construct a new DS18B20Sensor object
      *
+     * @param sharedBus Shared OneWire bus for multiple sensors
+     * @param address OneWire 64 bit bus address
      **************************************************************/
-    virtual ~SensorBase() = default;
+    DS18B20Sensor(OneWireTemperatureBus *sharedBus, uint64_t address);
 
     /**************************************************************
-     * @brief Sensor registration struct
+     * @brief Destroy the DS18B20 Sensor object
      *
      **************************************************************/
-    struct Sensor
-    {
-        /**************************************************************
-         * @brief Construct a new Sensor object
-         *
-         * @param name Sensor name
-         * @param instance Sensor implementation instance
-         **************************************************************/
-        Sensor(String name, SensorBase *instance) : sensorName(name), sensor(instance) {}
-        String sensorName; /*< Sensor registration name */
-        SensorBase *sensor;     /*< Sensor instance */
-    };
+    virtual ~DS18B20Sensor();
 
 public:
     /**************************************************************
      * @brief Run sensor measurement steps
      *
-     * Blocking fully virtual function, to be over written.
      * @return true Measurement successful
      * @return false Measurement failed
      **************************************************************/
-    virtual bool startMeasurement() = 0;
+    bool startMeasurement() override;
 
     /**************************************************************
      * @brief Get the measurement results
      *
-     * Blocking fully virtual function, to be over written.
      * @return uint16_t Sensor value
      **************************************************************/
-    virtual uint16_t getMeasurementResult() = 0;
+    uint16_t getMeasurementResult() override;
 
-protected:
-    uint16_t _sensorValue = 0; /*< Sensor value for publishing */
+private:
+    OneWireTemperatureBus *_sharedBus; /*< Shared OneWire bus for communication */
+    uint64_t _busAddress;              /*< 64 bit unique bus identifier */
 };

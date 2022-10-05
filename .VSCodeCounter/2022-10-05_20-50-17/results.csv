@@ -1,0 +1,17 @@
+"filename", "language", "C++", "Ini", "comment", "blank", "total"
+"d:\OneDrive - Avans Hogeschool\Minor\PRO Smart Roofs\Software\GreenRoof_Base\include\DataObject.h", "C++", 13, 0, 26, 4, 43
+"d:\OneDrive - Avans Hogeschool\Minor\PRO Smart Roofs\Software\GreenRoof_Base\include\DataPublisher.h", "C++", 38, 0, 93, 20, 151
+"d:\OneDrive - Avans Hogeschool\Minor\PRO Smart Roofs\Software\GreenRoof_Base\include\MeasurementController.h", "C++", 22, 0, 56, 11, 89
+"d:\OneDrive - Avans Hogeschool\Minor\PRO Smart Roofs\Software\GreenRoof_Base\include\Sensors\Com\OneWireTemperatureBus.h", "C++", 24, 0, 58, 12, 94
+"d:\OneDrive - Avans Hogeschool\Minor\PRO Smart Roofs\Software\GreenRoof_Base\include\Sensors\DS18B20Sensor.h", "C++", 18, 0, 41, 8, 67
+"d:\OneDrive - Avans Hogeschool\Minor\PRO Smart Roofs\Software\GreenRoof_Base\include\Sensors\SensorBase.h", "C++", 19, 0, 45, 7, 71
+"d:\OneDrive - Avans Hogeschool\Minor\PRO Smart Roofs\Software\GreenRoof_Base\include\Sensors\TestSensor.h", "C++", 13, 0, 29, 7, 49
+"d:\OneDrive - Avans Hogeschool\Minor\PRO Smart Roofs\Software\GreenRoof_Base\include\Settings\config.h", "C++", 10, 0, 13, 3, 26
+"d:\OneDrive - Avans Hogeschool\Minor\PRO Smart Roofs\Software\GreenRoof_Base\platformio.ini", "Ini", 0, 9, 9, 2, 20
+"d:\OneDrive - Avans Hogeschool\Minor\PRO Smart Roofs\Software\GreenRoof_Base\src\DataPublisher.cpp", "C++", 135, 0, 23, 31, 189
+"d:\OneDrive - Avans Hogeschool\Minor\PRO Smart Roofs\Software\GreenRoof_Base\src\MeasurementController.cpp", "C++", 50, 0, 13, 14, 77
+"d:\OneDrive - Avans Hogeschool\Minor\PRO Smart Roofs\Software\GreenRoof_Base\src\Sensors\Com\OneWireTemperatureBus.cpp", "C++", 59, 0, 16, 21, 96
+"d:\OneDrive - Avans Hogeschool\Minor\PRO Smart Roofs\Software\GreenRoof_Base\src\Sensors\DS18B20Sensor.cpp", "C++", 30, 0, 10, 7, 47
+"d:\OneDrive - Avans Hogeschool\Minor\PRO Smart Roofs\Software\GreenRoof_Base\src\Sensors\TestSensor.cpp", "C++", 16, 0, 10, 5, 31
+"d:\OneDrive - Avans Hogeschool\Minor\PRO Smart Roofs\Software\GreenRoof_Base\src\main.cpp", "C++", 28, 0, 17, 9, 54
+"Total", "-", 475, 9, 459, 161, 1104

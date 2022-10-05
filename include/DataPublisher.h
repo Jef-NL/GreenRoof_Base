@@ -1,7 +1,7 @@
 /**************************************************************
  * @file DataPublisher.h
  * @author Jef B (hj.baars@student.avans.nl)
- * @brief
+ * @brief Data parser and management for transmission and storage of sensor data
  * @version 0.1
  * @date 2022-10-03
  *

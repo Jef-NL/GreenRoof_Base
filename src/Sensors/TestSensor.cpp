@@ -1,7 +1,7 @@
 /**************************************************************
  * @file TestSensor.cpp
  * @author Jef B (hj.baars@student.avans.nl)
- * @brief
+ * @brief Test sensor class
  * @version 0.1
  * @date 2022-10-03
  *
@@ -24,7 +24,7 @@ bool TestSensor::startMeasurement()
     return true;
 }
 
-int TestSensor::getMeasurementResult()
+uint16_t TestSensor::getMeasurementResult()
 {
-    return this->_sensorValue;
+    return (uint16_t)this->_sensorValue;
 }

@@ -1,7 +1,7 @@
 /**************************************************************
  * @file DataObject.h
  * @author Jef B (hj.baars@student.avans.nl)
- * @brief
+ * @brief Data objects used for sensor data storage
  * @version 0.1
  * @date 2022-10-03
  *
