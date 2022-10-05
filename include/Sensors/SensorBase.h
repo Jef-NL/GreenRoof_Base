@@ -43,8 +43,8 @@ public:
          * @param instance Sensor implementation instance
          **/
         Sensor(String name, SensorBase *instance) : sensorName(name), sensor(instance) {}
-        String sensorName; /*< Sensor registration name */
-        SensorBase *sensor;     /*< Sensor instance */
+        String sensorName; /**< Sensor registration name */
+        SensorBase *sensor;     /**< Sensor instance */
     };
 
 public:
@@ -66,5 +66,5 @@ public:
     virtual uint16_t getMeasurementResult() = 0;
 
 protected:
-    uint16_t _sensorValue = 0; /*< Sensor value for publishing */
+    uint16_t _sensorValue = 0; /**< Sensor value for publishing */
 };

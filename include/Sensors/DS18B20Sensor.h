@@ -61,6 +61,6 @@ public:
     uint16_t getMeasurementResult() override;
 
 private:
-    OneWireTemperatureBus *_sharedBus; /*< Shared OneWire bus for communication */
-    uint64_t _busAddress;              /*< 64 bit unique bus identifier */
+    OneWireTemperatureBus *_sharedBus; /**< Shared OneWire bus for communication */
+    uint64_t _busAddress;              /**< 64 bit unique bus identifier */
 };

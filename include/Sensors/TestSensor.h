@@ -43,6 +43,6 @@ public:
     uint16_t getMeasurementResult() override;
 
 private:
-    uint16_t _localVal;  /*< Local test value */
+    uint16_t _localVal;  /**< Local test value */
 };
 

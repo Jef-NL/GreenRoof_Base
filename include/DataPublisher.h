@@ -141,10 +141,10 @@ private:
      **/
     void showTime(tm localTime);
 
-    bool _connected;        /*< Connections status */
-    bool _disconnected;     /*< Disconnected during process */
-    DataObject *_rawData;   /*< Raw data in struct */
-    String _parsedData;     /*< Parsed data in string */
-    HTTPClient _httpClient; /*< Http Client instance for POST */
-    time_t _lastTimestamp;  /*< Timestamp of last measurement */
+    bool _connected;        /**< Connections status */
+    bool _disconnected;     /**< Disconnected during process */
+    DataObject *_rawData;   /**< Raw data in struct */
+    String _parsedData;     /**< Parsed data in string */
+    HTTPClient _httpClient; /**< Http Client instance for POST */
+    time_t _lastTimestamp;  /**< Timestamp of last measurement */
 };

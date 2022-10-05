@@ -83,6 +83,6 @@ private:
      **/
     bool publishMeasurements();
 
-    DataPublisher *_publisher;                  /*< Data published instance */
-    std::vector<SensorBase::Sensor *> _sensors; /*< Sensors list */
+    DataPublisher *_publisher;                  /**< Data published instance */
+    std::vector<SensorBase::Sensor *> _sensors; /**< Sensors list */
 };

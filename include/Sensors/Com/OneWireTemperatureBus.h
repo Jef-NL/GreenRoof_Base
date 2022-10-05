@@ -86,8 +86,8 @@ private:
      **/
     void addressUint64ToArray(uint8_t *outpAddress, uint64_t address);
 
-    OneWire *_oneWireBus;                 /*< OneWire bus instance */
-    DallasTemperature *_connectedSensors; /*< DallasTemperature instance for DS18B20 sensors */
-    int _deviceCount;                     /*< Amount of discovered bus devices*/
-    unsigned long _lastMeasurementStamp;  /*< Last millisecond timestamp of measurement */
+    OneWire *_oneWireBus;                 /**< OneWire bus instance */
+    DallasTemperature *_connectedSensors; /**< DallasTemperature instance for DS18B20 sensors */
+    int _deviceCount;                     /**< Amount of discovered bus devices*/
+    unsigned long _lastMeasurementStamp;  /**< Last millisecond timestamp of measurement */
 };

@@ -27,8 +27,8 @@ struct DataEntry
      **/
     DataEntry(String name, int value) : fieldName(name), fieldValue(value){};
 
-    String fieldName; /*< Field name string */
-    int16_t fieldValue;    /*< Field data int */
+    String fieldName; /**< Field name string */
+    int16_t fieldValue;    /**< Field data int */
 };
 
 /**
@@ -38,5 +38,5 @@ struct DataEntry
  **/
 struct DataObject
 {
-    std::vector<DataEntry *> items; /*< List of data fields */
+    std::vector<DataEntry *> items; /**< List of data fields */
 };
