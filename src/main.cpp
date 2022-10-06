@@ -42,9 +42,9 @@ void setup()
   sharedBus = new OneWireTemperatureBus(ONE_WIRE_BUS);
 
   // Add sensors
-  controller->addSensor(new SensorBase::Sensor("TestSens1", new TestSensor(5)));
-  controller->addSensor(new SensorBase::Sensor("TempSens1", new DS18B20Sensor(sharedBus, (uint64_t)4035225328881985576)));
-  controller->addSensor(new SensorBase::Sensor("TempSens2", new DS18B20Sensor(sharedBus, (uint64_t)504403221035971880)));
+  controller->addSensor(new SensorBase::Sensor("intTest1", new TestSensor(5)));
+  controller->addSensor(new SensorBase::Sensor("intTemp1", new DS18B20Sensor(sharedBus, (uint64_t)4035225328881985576)));
+  controller->addSensor(new SensorBase::Sensor("intTemp2", new DS18B20Sensor(sharedBus, (uint64_t)504403221035971880)));
 
   // Run measurements
   controller->runProcess();

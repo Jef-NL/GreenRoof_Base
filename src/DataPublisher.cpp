@@ -120,7 +120,8 @@ bool DataPublisher::sendHTTPPost()
     _httpClient.begin(String(WEBSERVER_URL));
     _httpClient.addHeader("Content-Type", String(POST_CONTEXT_TYPE));
 
-    int response = _httpClient.POST(this->parseData());
+    String content = this->parseData();
+    int response = _httpClient.POST(content);
     _httpClient.end();
 
     switch (response)
@@ -129,7 +130,18 @@ bool DataPublisher::sendHTTPPost()
         Serial.printf("[HTTP] Success %d\n", response);
         return true;
         break;
-        // ToDo: Handle error responses
+    case HTTP_CODE_UNPROCESSABLE_ENTITY:
+        Serial.printf("[HTTP] Unprocessable Entity. Data contains non integer type. %s\n", content);
+        break;
+    case HTTP_CODE_METHOD_NOT_ALLOWED:
+        Serial.printf("[HTTP] Method not allowed. %d\n", response);
+        break;
+    case HTTP_CODE_BAD_REQUEST:
+        Serial.printf("[HTTP] Content type or payload not correctly formatted. %d\n", response);
+        break;
+    case HTTP_CODE_SERVICE_UNAVAILABLE:
+        Serial.printf("[HTTP] Service Unavalible. Database might be offline. %d\n", response);
+        break;
     default:
         Serial.printf("Unhandled HTTP response: %d\n", response);
         break;
@@ -143,10 +155,10 @@ String DataPublisher::parseData()
     DynamicJsonDocument doc(JSON_POST_DOC_SIZE);
 
     // Add timestamp
-    doc[String("timestamp")] = this->_lastTimestamp;
+    doc[String("intTimestamp")] = this->_lastTimestamp;
 
     // Add sensor data
-    for (auto entry : this->_rawData->items) 
+    for (auto entry : this->_rawData->items)
     {
         // Add measurement
         doc[entry->fieldName.c_str()] = entry->fieldValue;
