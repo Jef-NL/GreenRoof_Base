@@ -22,5 +22,9 @@
 #define ONE_WIRE_BUS 4                 /**< Hardware pin address for OneWire bus */
 #define MEASUREMENT_VALID_MS 1000      /**< Milliseconds a measurement can be used by the bus connected sensors, to limit polling to often */
 #define TEMPERATURE_MULTIPLICATION 100 /**< Multiplication factor for data transmission without decimal points */
-
 // Sens Address: 4035225328881985576 Address: 504403221035971880
+
+// Moisture sensor SEN0114
+#define ANALOG_SAMPLE_COUNT 5 /**< Samples per measurement */
+#define ANALOG_MAX_VALUE 4095 /**< Maximum analog measurement value 12 bit resolution */
+#define MOIST1_PIN 34         /**< Analog sensor pin for moisture sensor 1 */

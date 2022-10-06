@@ -56,7 +56,7 @@ public:
     /**
      * @brief Get the measurement results
      *
-     * @return uint16_t Sensor value
+     * @return uint16_t Temperature in degrees * TEMPERATURE_MULTIPLICATION
      **/
     uint16_t getMeasurementResult() override;
 

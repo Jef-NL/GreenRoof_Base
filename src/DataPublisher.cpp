@@ -108,7 +108,7 @@ bool DataPublisher::sendData()
     }
 
     // Send HTTP post
-    this->sendHTTPPost();
+    // this->sendHTTPPost();
 
     // Clear data after it has been sended
     delete _rawData;
