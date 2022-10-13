@@ -11,6 +11,7 @@
 #pragma once
 #include <Arduino.h>
 
+#include "Settings/config.h"
 /**
  * @brief Sensor base class
  *

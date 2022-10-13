@@ -108,6 +108,7 @@ bool DataPublisher::sendData()
     }
 
     // Send HTTP post
+    //! TEMP REMOVED
     // this->sendHTTPPost();
 
     // Clear data after it has been sended

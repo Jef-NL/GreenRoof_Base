@@ -28,3 +28,9 @@
 #define ANALOG_SAMPLE_COUNT 5 /**< Samples per measurement */
 #define ANALOG_MAX_VALUE 4095 /**< Maximum analog measurement value 12 bit resolution */
 #define MOIST1_PIN 34         /**< Analog sensor pin for moisture sensor 1 */
+
+// Water level sensor
+#define SPEED_OF_SOUND_MS 343.0f       /**< Speed of sound default */
+#define WATER_LEVEL_MULTIPLICATION 100 /**< Multiplication factor for data transmission without decimal points */
+#define WATER_ECHO_PIN 14              /**< Measurement pin for ultrasonic sensor */
+#define WATER_TRIGGER_PIN 27           /**< Trigger pin for ultrasonic sensor */

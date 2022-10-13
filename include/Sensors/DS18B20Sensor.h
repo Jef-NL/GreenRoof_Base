@@ -11,7 +11,6 @@
 #pragma once
 #include <Arduino.h>
 
-#include "Settings/config.h"
 #include "SensorBase.h"
 #include "Sensors/Com/OneWireTemperatureBus.h"
 

@@ -20,6 +20,7 @@
 #include "Sensors/TestSensor.h"
 #include "Sensors/DS18B20Sensor.h"
 #include "Sensors/MoistureSensor.h"
+#include "Sensors/WaterLevelSensor.h"
 
 // Controller
 MeasurementController *controller;
@@ -47,6 +48,7 @@ void setup()
   controller->addSensor(new SensorBase::Sensor("intTemp1", new DS18B20Sensor(sharedBus, (uint64_t)4035225328881985576)));
   controller->addSensor(new SensorBase::Sensor("intTemp2", new DS18B20Sensor(sharedBus, (uint64_t)504403221035971880)));
   controller->addSensor(new SensorBase::Sensor("Moist", new MoistureSensor(MOIST1_PIN)));
+  controller->addSensor(new SensorBase::Sensor("Dist", new WaterLevelSensor(WATER_ECHO_PIN, WATER_TRIGGER_PIN)));
 
   // Run measurements
   controller->runProcess();

@@ -11,7 +11,6 @@
 #pragma once
 #include <Arduino.h>
 
-#include "Settings/config.h"
 #include "SensorBase.h"
 
 /**
@@ -51,5 +50,5 @@ public:
     uint16_t getMeasurementResult() override;
 
 private:
-    uint8_t _sensorPin; /**< Analog sensor pin */
+    const uint8_t _sensorPin; /**< Analog sensor pin */
 };
