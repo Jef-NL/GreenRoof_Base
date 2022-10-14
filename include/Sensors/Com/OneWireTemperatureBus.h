@@ -15,7 +15,7 @@
 
 #include "Settings/config.h"
 
-#define SENSOR_INVALID -127.0
+#define SENSOR_INVALID -127.0 /**< Sensor disconnected value */
 
 /**
  * @brief Shared OneWire temperature bus object

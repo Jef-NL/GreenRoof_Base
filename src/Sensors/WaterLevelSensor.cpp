@@ -38,6 +38,7 @@ bool WaterLevelSensor::startMeasurement()
     float distance = duration * ((float)SPEED_OF_SOUND_MS / 10000.0f) / 2.0f; // in cm
 
     // ToDo: Calculate water level by bucket size (cm to ml)
+    // Capacity turncated cone or Cylinder
     _sensorValue = (uint16_t)(distance * (float)WATER_LEVEL_MULTIPLICATION);
 
     return true;

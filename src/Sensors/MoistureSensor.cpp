@@ -29,7 +29,7 @@ bool MoistureSensor::startMeasurement()
     {
         uint16_t reading = analogRead(_sensorPin);
         measurementSum += (int)reading;
-        delay(25);
+        delay(ANALOG_SAMPLE_DELAY);
     }
 
     _sensorValue = (uint16_t)((measurementSum / ANALOG_SAMPLE_COUNT) / (ANALOG_MAX_VALUE / 1000));
