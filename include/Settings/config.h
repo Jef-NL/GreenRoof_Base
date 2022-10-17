@@ -29,6 +29,8 @@
 #define ANALOG_SAMPLE_DELAY 25 /**< Delay in ms between each measurement */
 #define ANALOG_MAX_VALUE 4095  /**< Maximum analog measurement value 12 bit resolution */
 #define MOIST1_PIN 34          /**< Analog sensor pin for moisture sensor 1 */
+#define MOIST2_PIN 35          /**< Analog sensor pin for moisture sensor 2 */
+#define MOIST3_PIN 32          /**< Analog sensor pin for moisture sensor 3 */
 
 // Water level sensor
 #define SPEED_OF_SOUND_MS 343.0f       /**< Speed of sound default */
