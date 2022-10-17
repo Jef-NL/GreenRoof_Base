@@ -4,9 +4,9 @@
  * @brief Main runnable
  * @version 0.1
  * @date 2022-10-05
- * 
+ *
  * @copyright Copyright (c) 2022
- * 
+ *
  **/
 
 #include <Arduino.h>
@@ -30,7 +30,7 @@ OneWireTemperatureBus *sharedBus;
 
 /**
  * @brief Single run function on startup
- * 
+ *
  **/
 void setup()
 {
@@ -43,12 +43,14 @@ void setup()
   // Create Bus instance
   sharedBus = new OneWireTemperatureBus(ONE_WIRE_BUS);
 
-  // Add sensors
-  controller->addSensor(new SensorBase::Sensor("intTest1", new TestSensor(5)));
-  controller->addSensor(new SensorBase::Sensor("intTemp1", new DS18B20Sensor(sharedBus, (uint64_t)4035225328881985576)));
-  controller->addSensor(new SensorBase::Sensor("intTemp2", new DS18B20Sensor(sharedBus, (uint64_t)504403221035971880)));
-  controller->addSensor(new SensorBase::Sensor("Moist", new MoistureSensor(MOIST1_PIN)));
-  controller->addSensor(new SensorBase::Sensor("Dist", new WaterLevelSensor(WATER_ECHO_PIN, WATER_TRIGGER_PIN)));
+  // Add sensors                              |  Sensor name    |     Sensor type           |
+  controller->addSensor(new SensorBase::Sensor("moist_1_green", new MoistureSensor(MOIST1_PIN)));
+  controller->addSensor(new SensorBase::Sensor("moist_2_green", new MoistureSensor(MOIST2_PIN)));
+  controller->addSensor(new SensorBase::Sensor("moist_3_green", new MoistureSensor(MOIST3_PIN)));
+  controller->addSensor(new SensorBase::Sensor("temp_in_green", new DS18B20Sensor(sharedBus, (uint64_t)4035225328881985576)));
+  controller->addSensor(new SensorBase::Sensor("temp_surf_green", new DS18B20Sensor(sharedBus, (uint64_t)504403221035971880)));
+  // controller->addSensor(new SensorBase::Sensor("temp_out_green", new DS18B20Sensor(sharedBus, (uint64_t)0)));
+  controller->addSensor(new SensorBase::Sensor("wr_green", new WaterLevelSensor(WATER_ECHO_PIN, WATER_TRIGGER_PIN)));
 
   // Run measurements
   controller->runProcess();
@@ -61,7 +63,7 @@ void setup()
 
 /**
  * @brief Loop function
- * 
+ *
  * Not in use due to deepsleep reset
  **/
 void loop()
