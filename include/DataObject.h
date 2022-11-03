@@ -38,5 +38,6 @@ struct DataEntry
  **/
 struct DataObject
 {
+    time_t timestamp;               /**< Data timestamp */
     std::vector<DataEntry *> items; /**< List of data fields */
 };

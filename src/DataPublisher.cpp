@@ -10,7 +10,7 @@
  **/
 #include "DataPublisher.h"
 
-DataPublisher::DataPublisher() : _connected(false), _disconnected(false), _parsedData(""), _lastTimestamp(0L)
+DataPublisher::DataPublisher() : _connected(false), _disconnected(false), _lastTimestamp(0L)
 {
 }
 
@@ -72,6 +72,12 @@ void DataPublisher::wirelessEvent(WiFiEvent_t event, WiFiEventInfo_t info)
     }
 }
 
+void DataPublisher::setTransmissionMode(TransmissionBase *instance)
+{
+    if (instance != nullptr)
+        _dataEndpoint = instance;
+}
+
 void DataPublisher::setData(DataObject data)
 {
     _rawData = &data;
@@ -90,7 +96,7 @@ void DataPublisher::addData(String fieldName, int fieldValue)
 
 bool DataPublisher::sendData()
 {
-    if (_rawData == nullptr)
+    if (_rawData == nullptr || _dataEndpoint == nullptr)
         return false;
 
     // Wait for connection while not disconnected
@@ -98,7 +104,7 @@ bool DataPublisher::sendData()
         delayMicroseconds(10);
 
     // Update timestamp for measurement
-    this->updateTimestamp();
+    _rawData->timestamp = this->updateTimestamp();
 
     if (this->_disconnected)
     {
@@ -107,71 +113,16 @@ bool DataPublisher::sendData()
         return false;
     }
 
-    // Send HTTP post
-    //! TEMP REMOVED
-    // this->sendHTTPPost();
+    // Send data away
+    if (!_dataEndpoint->transmitData(_rawData)) 
+    {
+        Serial.println("Data failed to send...");
+        // ToDo: Handle saving here
+    }
 
     // Clear data after it has been sended
     delete _rawData;
     return true;
-}
-
-bool DataPublisher::sendHTTPPost()
-{
-    _httpClient.begin(String(WEBSERVER_URL));
-    _httpClient.addHeader("Content-Type", String(POST_CONTEXT_TYPE));
-
-    String content = this->parseData();
-    int response = _httpClient.POST(content);
-    _httpClient.end();
-
-    switch (response)
-    {
-    case HTTP_CODE_OK:
-        Serial.printf("[HTTP] Success %d\n", response);
-        return true;
-        break;
-    case HTTP_CODE_UNPROCESSABLE_ENTITY:
-        Serial.printf("[HTTP] Unprocessable Entity. Data contains non integer type. %s\n", content);
-        break;
-    case HTTP_CODE_METHOD_NOT_ALLOWED:
-        Serial.printf("[HTTP] Method not allowed. %d\n", response);
-        break;
-    case HTTP_CODE_BAD_REQUEST:
-        Serial.printf("[HTTP] Content type or payload not correctly formatted. %d\n", response);
-        break;
-    case HTTP_CODE_SERVICE_UNAVAILABLE:
-        Serial.printf("[HTTP] Service Unavalible. Database might be offline. %d\n", response);
-        break;
-    default:
-        Serial.printf("Unhandled HTTP response: %d\n", response);
-        break;
-    }
-
-    return false;
-}
-
-String DataPublisher::parseData()
-{
-    DynamicJsonDocument doc(JSON_POST_DOC_SIZE);
-
-    // Add timestamp
-    doc[String("intTimestamp")] = this->_lastTimestamp;
-
-    // Add sensor data
-    for (auto entry : this->_rawData->items)
-    {
-        // Add measurement
-        doc[entry->fieldName.c_str()] = entry->fieldValue;
-    }
-
-    // Json to string
-    serializeJson(doc, _parsedData);
-
-    // DEBUG
-    Serial.println(_parsedData);
-
-    return String(_parsedData);
 }
 
 time_t DataPublisher::updateTimestamp()

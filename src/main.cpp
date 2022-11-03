@@ -13,6 +13,7 @@
 #include <WiFi.h>
 #include <HTTPClient.h>
 #include "Settings/config.h"
+#include "Transmit/HTTPTransmission.h"
 
 #include "MeasurementController.h"
 #include "Sensors/Com/OneWireTemperatureBus.h"
@@ -40,6 +41,7 @@ void setup()
 
   // Create controller instance
   controller = new MeasurementController();
+  DataPublisher::INSTANCE()->setTransmissionMode(new HTTPTransmission());
   // Create Bus instance
   sharedBus = new OneWireTemperatureBus(ONE_WIRE_BUS);
 
@@ -58,6 +60,11 @@ void setup()
   // Set controller to sleep
   Serial.printf("Going to sleep for %d seconds.\n", TIME_TO_SLEEP);
   Serial.flush();
+
+  esp_sleep_pd_config(ESP_PD_DOMAIN_MAX, ESP_PD_OPTION_OFF);
+  esp_sleep_pd_config(ESP_PD_DOMAIN_RTC_PERIPH, ESP_PD_OPTION_OFF);
+  esp_sleep_pd_config(ESP_PD_DOMAIN_RTC_SLOW_MEM, ESP_PD_OPTION_OFF);
+  esp_sleep_pd_config(ESP_PD_DOMAIN_RTC_FAST_MEM, ESP_PD_OPTION_OFF);
   esp_deep_sleep_start();
 }
 
