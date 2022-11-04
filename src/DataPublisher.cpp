@@ -10,6 +10,8 @@
  **/
 #include "DataPublisher.h"
 
+RTC_DATA_ATTR int32_t channel = -1;
+
 DataPublisher::DataPublisher() : _connected(false), _disconnected(false), _lastTimestamp(0L)
 {
 }
@@ -28,7 +30,13 @@ DataPublisher *DataPublisher::INSTANCE()
 
 void DataPublisher::wirelessConnect()
 {
-    WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+    WiFi.mode(WIFI_STA);
+    if (channel > -1) {
+        WiFi.begin(WIFI_SSID, WIFI_PASSWORD, channel);
+        Serial.println("PRESET CHANNEL");
+    }    
+    else
+        WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
     Serial.printf("Connecting to: %s\n", WIFI_SSID);
     WiFi.onEvent(DataPublisher::wirelessEvent);
 }
@@ -58,6 +66,8 @@ void DataPublisher::wirelessEvent(WiFiEvent_t event, WiFiEventInfo_t info)
     case SYSTEM_EVENT_STA_GOT_IP:
         Serial.print("IP Address: ");
         Serial.println(WiFi.localIP());
+        Serial.printf("Channel %d\n", WiFi.channel());
+        channel = WiFi.channel();
         DataPublisher::INSTANCE()->_connected = true;
         break;
     case SYSTEM_EVENT_STA_DISCONNECTED:
@@ -109,6 +119,7 @@ bool DataPublisher::sendData()
     if (this->_disconnected)
     {
         Serial.println("Connecting failed, Got disconnected...");
+        channel = -1;
         // ToDo: Store data in memory
         return false;
     }

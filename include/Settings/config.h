@@ -13,6 +13,7 @@
 
 // Measurement time settings
 #define uS_TO_S_FACTOR 1000000                             /**< Conversion factor for micro seconds to seconds */
+#define uS_TO_mS_FACTOR 1000                               /**< Conversion factor for micro seconds to seconds */
 #define TIME_TO_SLEEP 30                                   /**< Time ESP32 will go to sleep (in seconds) */
 #define WEBSERVER_URL "http://192.168.0.175/SensorPub.php" /**< Webserver URL base for data transport to database */
 #define POST_CONTEXT_TYPE "application/json"               /**< Data contect type for POST */
@@ -37,3 +38,14 @@
 #define WATER_LEVEL_MULTIPLICATION 100 /**< Multiplication factor for data transmission without decimal points */
 #define WATER_ECHO_PIN 14              /**< Measurement pin for ultrasonic sensor */
 #define WATER_TRIGGER_PIN 27           /**< Trigger pin for ultrasonic sensor */
+
+// IOT Hub
+#define INCOMING_DATA_BUFFER_SIZE 256
+#define IOT_CONFIG_IOTHUB_FQDN "green-roof-prototype.azure-devices.net"
+#define IOT_CONFIG_DEVICE_ID "TestESP"
+#define IOT_CONFIG_DEVICE_KEY "4LBZcoSebA7xvzPg3vIpSnIieqU2lJBv5IeyenYgyX4="
+#define sizeofarray(a) (sizeof(a) / sizeof(a[0]))
+#define AZURE_SDK_CLIENT_USER_AGENT "c%2F" AZ_SDK_VERSION_STRING "(ard;esp32)"
+#define SAS_TOKEN_DURATION_IN_MINUTES 60
+#define MQTT_QOS1 1
+#define DO_NOT_RETAIN_MSG 0
