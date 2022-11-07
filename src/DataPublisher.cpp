@@ -76,6 +76,9 @@ void DataPublisher::wirelessEvent(WiFiEvent_t event, WiFiEventInfo_t info)
         DataPublisher::INSTANCE()->_connected = false;
         DataPublisher::INSTANCE()->_disconnected = true;
         break;
+    case SYSTEM_EVENT_STA_STOP:
+        Serial.println("Connection closed");
+        break;
     default:
         Serial.printf("[WiFi-event] Unhandeled event: %d\n", event);
         break;

@@ -37,7 +37,7 @@ bool MeasurementController::runProcess() {
     this->connect();
     this->runMeasurements();
     this->publishMeasurements();
-    _publisher->wirelessDisconnect();
+    //_publisher->wirelessDisconnect();
     
     return true;
 }

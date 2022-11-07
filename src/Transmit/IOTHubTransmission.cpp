@@ -96,6 +96,8 @@ bool IOTHubTransmission::transmitData(DataObject *object)
         }
     };
     Serial.println("Published data");
+
+    (void)esp_mqtt_client_destroy(mqttClient);
     return true;
 }
 
