@@ -10,12 +10,15 @@
  **/
 #include "Sensors/MoistureSensor.h"
 
-MoistureSensor::MoistureSensor(uint8_t pin) : _sensorPin(pin)
+MoistureSensor::MoistureSensor(uint8_t pin, uint8_t voltPin) : _sensorPin(pin), _voltagePin(voltPin)
 {
+    pinMode(voltPin, OUTPUT);
+    digitalWrite(voltPin, HIGH);
 }
 
 MoistureSensor::~MoistureSensor()
 {
+    digitalWrite(_voltagePin, LOW); // Auto shutsdown on sleep.
 }
 
 bool MoistureSensor::startMeasurement()

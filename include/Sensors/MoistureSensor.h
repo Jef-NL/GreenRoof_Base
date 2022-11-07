@@ -24,8 +24,9 @@ public:
      * @brief Construct a new Moisture Sensor object
      *
      * @param pin Analog pin
+     * @param voltPin Voltage switching pin
      **/
-    MoistureSensor(uint8_t pin);
+    MoistureSensor(uint8_t pin, uint8_t voltPin);
 
     /**
      * @brief Destroy the Moisture Sensor object
@@ -51,4 +52,5 @@ public:
 
 private:
     const uint8_t _sensorPin; /**< Analog sensor pin */
+    const uint8_t _voltagePin; /**< Enable voltage on sensor */
 };

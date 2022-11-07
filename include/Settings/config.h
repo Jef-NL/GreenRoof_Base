@@ -30,14 +30,17 @@
 #define ANALOG_SAMPLE_DELAY 25 /**< Delay in ms between each measurement */
 #define ANALOG_MAX_VALUE 4095  /**< Maximum analog measurement value 12 bit resolution */
 #define MOIST1_PIN 34          /**< Analog sensor pin for moisture sensor 1 */
+#define MOIST1_VOLT 25         /**< Voltage switch pin for moisture sensor 1 */
 #define MOIST2_PIN 35          /**< Analog sensor pin for moisture sensor 2 */
+#define MOIST2_VOLT 26         /**< Voltage switch pin for moisture sensor 2 */
 #define MOIST3_PIN 32          /**< Analog sensor pin for moisture sensor 3 */
+#define MOIST3_VOLT 27         /**< Voltage switch pin for moisture sensor 3 */
 
 // Water level sensor
 #define SPEED_OF_SOUND_MS 343.0f       /**< Speed of sound default */
 #define WATER_LEVEL_MULTIPLICATION 100 /**< Multiplication factor for data transmission without decimal points */
 #define WATER_ECHO_PIN 14              /**< Measurement pin for ultrasonic sensor */
-#define WATER_TRIGGER_PIN 27           /**< Trigger pin for ultrasonic sensor */
+#define WATER_TRIGGER_PIN 12           /**< Trigger pin for ultrasonic sensor */
 
 // IOT Hub
 #define INCOMING_DATA_BUFFER_SIZE 256
