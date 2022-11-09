@@ -55,15 +55,15 @@ void setup()
   sharedBus = new OneWireTemperatureBus(ONE_WIRE_BUS);
 
   // Add sensors                              |  Sensor name    |     Sensor type           |
-  controller->addSensor(new SensorBase::Sensor("test_sen_1", new TestSensor(6)));
-  controller->addSensor(new SensorBase::Sensor("test_sen_2", new TestSensor(18)));
-  // controller->addSensor(new SensorBase::Sensor("moist_1_green", new MoistureSensor(MOIST1_PIN, MOIST1_VOLT)));
-  // controller->addSensor(new SensorBase::Sensor("moist_2_green", new MoistureSensor(MOIST2_PIN, MOIST2_VOLT)));
-  // controller->addSensor(new SensorBase::Sensor("moist_3_green", new MoistureSensor(MOIST3_PIN, MOIST3_VOLT)));
-  // controller->addSensor(new SensorBase::Sensor("temp_in_green", new DS18B20Sensor(sharedBus, (uint64_t)4035225328881985576)));
-  // controller->addSensor(new SensorBase::Sensor("temp_surf_green", new DS18B20Sensor(sharedBus, (uint64_t)504403221035971880)));
-  // // controller->addSensor(new SensorBase::Sensor("temp_out_green", new DS18B20Sensor(sharedBus, (uint64_t)0)));
-  // controller->addSensor(new SensorBase::Sensor("wr_green", new WaterLevelSensor(WATER_ECHO_PIN, WATER_TRIGGER_PIN)));
+  controller->addSensor(new SensorBase::Sensor(SENS_TEMP1_NAME, new TestSensor(6)));
+  controller->addSensor(new SensorBase::Sensor(SENS_TEMP2_NAME, new TestSensor(18)));
+  // controller->addSensor(new SensorBase::Sensor(SENS_MOIST1_NAME, new MoistureSensor(MOIST1_PIN, MOIST1_VOLT)));
+  // controller->addSensor(new SensorBase::Sensor(SENS_MOIST2_NAME, new MoistureSensor(MOIST2_PIN, MOIST2_VOLT)));
+  // controller->addSensor(new SensorBase::Sensor(SENS_MOIST3_NAME, new MoistureSensor(MOIST3_PIN, MOIST3_VOLT)));
+  // controller->addSensor(new SensorBase::Sensor(SENS_TEMP1_NAME, new DS18B20Sensor(sharedBus, (uint64_t)4035225328881985576)));
+  // controller->addSensor(new SensorBase::Sensor(SENS_TEMP2_NAME, new DS18B20Sensor(sharedBus, (uint64_t)504403221035971880)));
+  // // controller->addSensor(new SensorBase::Sensor(SENS_TEMP3_NAME, new DS18B20Sensor(sharedBus, (uint64_t)0)));
+  // controller->addSensor(new SensorBase::Sensor(SENS_WATER_NAME, new WaterLevelSensor(WATER_ECHO_PIN, WATER_TRIGGER_PIN)));
 
   // Run measurements
   controller->runProcess();
@@ -78,7 +78,7 @@ void setup()
   WiFi.mode(WIFI_OFF);
   esp_wifi_stop();
 
-  Serial.printf("Going to sleep for %d milliseconds.\n", ((TIME_TO_SLEEP * 1000) - timePassed));
+  Serial.printf("Going to sleep for %lu milliseconds.\n", ((TIME_TO_SLEEP * 1000) - timePassed));
   Serial.flush();
 
   esp_sleep_enable_timer_wakeup(((TIME_TO_SLEEP * 1000) - timePassed) * uS_TO_mS_FACTOR);

@@ -34,10 +34,17 @@ public:
      * @brief Transmit data using method
      * 
      * @param object Measurement struct
+     * @param skipSetup Skip steps for instant transmit
      * @return true Transmission successfull
      * @return false Transmission failed.
      */
-    virtual bool transmitData(DataObject *object) = 0;
+    virtual bool transmitData(DataObject *object, bool skipSetup = false) = 0;
+
+    /**
+     * @brief Default close method, can be overwritten
+     * 
+    **/
+    virtual void close() {};
 
 private:
     /**

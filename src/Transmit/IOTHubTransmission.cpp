@@ -21,6 +21,7 @@ static const char *mqtt_broker_uri = "mqtts://" IOT_CONFIG_IOTHUB_FQDN;
 static const char *device_id = IOT_CONFIG_DEVICE_ID;
 static const int mqtt_port = AZ_IOT_DEFAULT_MQTT_CONNECT_PORT;
 static bool connected = false;
+static uint16_t pubCount = 0;
 
 static char mqtt_client_id[128];
 static char mqtt_username[128];
@@ -41,19 +42,25 @@ IOTHubTransmission::~IOTHubTransmission()
 {
 }
 
-bool IOTHubTransmission::transmitData(DataObject *object)
+bool IOTHubTransmission::transmitData(DataObject *object, bool skipSetup)
 {
     _dataObject = object;
     //? We are connected, so we can setup and send.
 
     // Setup IOT Hub Client
-    initIotHubClient();
+    if (!skipSetup)
+        initIotHubClient();
     // Setup MQTT Client
     if (sasToken.IsExpired())
     {
         (void)esp_mqtt_client_destroy(mqttClient);
+        initMqttClient();
     }
-    initMqttClient();
+    else
+    {
+        if (!skipSetup)
+            initMqttClient();
+    }
 
     // Parse Json and convert to char array
     _parsedData = this->parseData();
@@ -86,31 +93,52 @@ bool IOTHubTransmission::transmitData(DataObject *object)
     }
 
     uint16_t timeout = 0;
-    while (!connected){
+    while (!connected)
+    {
         Serial.print(".");
         delay(10);
         timeout++;
-        if (timeout > 200) {
+        if (timeout > 200)
+        {
             Serial.println("MQTT publish failed");
             return false;
         }
     };
     Serial.println("Published data");
+    pubCount++;
+    _parsedData = "";
+    _dataObject = nullptr;
+
+    return true;
+}
+
+void IOTHubTransmission::close()
+{
+    uint16_t timeout = 0;
+    while(pubCount > 0)
+    {
+        delay(10);
+        timeout++;
+        if (timeout > (TIME_TO_SLEEP * 100))
+        {
+            Serial.println("MQTT publish Never finished before new measurement");
+            break;
+        }
+    }
 
     (void)esp_mqtt_client_destroy(mqttClient);
-    return true;
 }
 
 void receivedCallback(char *topic, byte *payload, unsigned int length)
 {
-  Serial.print("Received [");
-  Serial.print(topic);
-  Serial.print("]: ");
-  for (int i = 0; i < length; i++)
-  {
-    Serial.print((char)payload[i]);
-  }
-  Serial.println("");
+    Serial.print("Received [");
+    Serial.print(topic);
+    Serial.print("]: ");
+    for (int i = 0; i < length; i++)
+    {
+        Serial.print((char)payload[i]);
+    }
+    Serial.println("");
 }
 
 esp_err_t IOTHubTransmission::mqtt_event_handler(esp_mqtt_event_handle_t event)
@@ -121,6 +149,7 @@ esp_err_t IOTHubTransmission::mqtt_event_handler(esp_mqtt_event_handle_t event)
 
     case MQTT_EVENT_ERROR:
         Serial.println("MQTT event MQTT_EVENT_ERROR");
+        connected = false;
         break;
     case MQTT_EVENT_CONNECTED:
         Serial.println("MQTT event MQTT_EVENT_CONNECTED");
@@ -138,6 +167,7 @@ esp_err_t IOTHubTransmission::mqtt_event_handler(esp_mqtt_event_handle_t event)
         break;
     case MQTT_EVENT_DISCONNECTED:
         Serial.println("MQTT event MQTT_EVENT_DISCONNECTED");
+        connected = false;
         break;
     case MQTT_EVENT_SUBSCRIBED:
         Serial.println("MQTT event MQTT_EVENT_SUBSCRIBED");
@@ -147,6 +177,7 @@ esp_err_t IOTHubTransmission::mqtt_event_handler(esp_mqtt_event_handle_t event)
         break;
     case MQTT_EVENT_PUBLISHED:
         Serial.println("MQTT event MQTT_EVENT_PUBLISHED");
+        pubCount--;
         break;
     case MQTT_EVENT_DATA:
         Serial.println("MQTT event MQTT_EVENT_DATA");
@@ -182,7 +213,7 @@ String IOTHubTransmission::parseData()
     DynamicJsonDocument doc(JSON_POST_DOC_SIZE);
 
     // Add timestamp
-    doc[String("intTimestamp")] = this->_dataObject->timestamp;
+    doc[String(TIMESTAMP_NAME)] = this->_dataObject->timestamp;
 
     // Add sensor data
     for (auto entry : this->_dataObject->items)

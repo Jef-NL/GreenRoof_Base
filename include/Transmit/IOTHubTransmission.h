@@ -45,11 +45,24 @@ public:
      * @brief Transmit data using HTTP Post method
      *
      * @param object Measurement struct
+     * @param skipSetup Skip steps for instant transmit
      * @return true Transmission successfull
      * @return false Transmission failed.
      */
-    bool transmitData(DataObject *object) override;
+    bool transmitData(DataObject *object, bool skipSetup = false) override;
 
+    /**
+     * @brief Close connection with endpoint
+     * 
+    **/
+    void close() override;
+
+    /**
+     * @brief MQTT event handler method
+     * 
+     * @param event MQTT Event
+     * @return esp_err_t Error on fault
+    **/
     static esp_err_t mqtt_event_handler(esp_mqtt_event_handle_t event);
 
 private:

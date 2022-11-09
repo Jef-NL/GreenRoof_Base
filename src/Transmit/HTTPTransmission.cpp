@@ -20,7 +20,7 @@ HTTPTransmission::~HTTPTransmission()
 
 }
 
-bool HTTPTransmission::transmitData(DataObject *object)
+bool HTTPTransmission::transmitData(DataObject *object, bool skipSetup)
 {
     if (object == nullptr)
         return false;
@@ -65,7 +65,7 @@ String HTTPTransmission::parseData()
     DynamicJsonDocument doc(JSON_POST_DOC_SIZE);
 
     // Add timestamp
-    doc[String("intTimestamp")] = this->_dataObject->timestamp;
+    doc[String(TIMESTAMP_NAME)] = this->_dataObject->timestamp;
 
     // Add sensor data
     for (auto entry : this->_dataObject->items)

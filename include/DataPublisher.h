@@ -16,6 +16,7 @@
 #include "Settings/config.h"
 #include "DataObject.h"
 #include "Transmit/TransmissionBase.h"
+#include "DataStore.h"
 
 #define NTP_SERVER "ch.pool.ntp.org"
 #define TZ_INFO "CET-1CEST-2,M3.5.0/02:00:00,M10.5.0/03:00:00" // enter your time zone (https://remotemonitoringsystems.ca/time-zone-abbreviations.php)
@@ -77,7 +78,7 @@ public:
 
     /**
      * @brief Set the Transmission Mode object
-     * 
+     *
      * @param instance Transission instance
      */
     void setTransmissionMode(TransmissionBase *instance);
@@ -132,9 +133,10 @@ private:
      **/
     void showTime(tm localTime);
 
-    bool _connected;        /**< Connections status */
-    bool _disconnected;     /**< Disconnected during process */
-    DataObject *_rawData;   /**< Raw data in struct */
+    bool _connected;                 /**< Connections status */
+    bool _disconnected;              /**< Disconnected during process */
+    DataObject *_rawData;            /**< Raw data in struct */
     TransmissionBase *_dataEndpoint; /**< Transmission method instance */
-    time_t _lastTimestamp;  /**< Timestamp of last measurement */
+    time_t _lastTimestamp;           /**< Timestamp of last measurement */
+    DataStore *_dataStorage;         /**< Local data storage instance */
 };

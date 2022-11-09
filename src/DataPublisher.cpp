@@ -14,6 +14,7 @@ RTC_DATA_ATTR int32_t channel = -1;
 
 DataPublisher::DataPublisher() : _connected(false), _disconnected(false), _lastTimestamp(0L)
 {
+    _dataStorage = new DataStore();
 }
 
 DataPublisher::~DataPublisher()
@@ -123,7 +124,7 @@ bool DataPublisher::sendData()
     {
         Serial.println("Connecting failed, Got disconnected...");
         channel = -1;
-        // ToDo: Store data in memory
+        _dataStorage->storeDataObject(*_rawData);
         return false;
     }
 
@@ -131,11 +132,19 @@ bool DataPublisher::sendData()
     if (!_dataEndpoint->transmitData(_rawData)) 
     {
         Serial.println("Data failed to send...");
-        // ToDo: Handle saving here
+        _dataStorage->storeDataObject(*_rawData);
+        return false;
+    }
+
+    // Data has been send sucessfully before
+    if (_dataStorage->dataAvailable())
+    {
+        _dataStorage->transmitDataStorage(_dataEndpoint);
     }
 
     // Clear data after it has been sended
     delete _rawData;
+    _dataEndpoint->close();
     return true;
 }
 

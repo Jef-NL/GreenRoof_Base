@@ -38,10 +38,11 @@ public:
      * @brief Transmit data using HTTP Post method
      * 
      * @param object Measurement struct
+     * @param skipSetup Skip steps for instant transmit
      * @return true Transmission successfull
      * @return false Transmission failed.
      */
-    bool transmitData(DataObject *object) override;
+    bool transmitData(DataObject *object, bool skipSetup = false) override;
 
 private:
     /**
