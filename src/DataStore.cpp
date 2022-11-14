@@ -36,10 +36,12 @@ void DataStore::storeDataObject(DataObject data)
                   storeData.temp1,
                   storeData.temp2,
                   storeData.temp3,
+                  storeData.waterLvl,
+#ifdef GREEN_ROOF
                   storeData.moist1,
                   storeData.moist2,
                   storeData.moist3,
-                  storeData.waterLvl,
+#endif
                   storeData.timestamp);
 }
 
@@ -76,14 +78,16 @@ DataStore::StorageBlock DataStore::formatData(DataObject data)
             returnData.temp2 = entry->fieldValue;
         else if (strcmp(entry->fieldName.c_str(), SENS_TEMP3_NAME))
             returnData.temp3 = entry->fieldValue;
+        else if (strcmp(entry->fieldName.c_str(), SENS_WATER_NAME))
+            returnData.waterLvl = entry->fieldValue;
+#ifdef GREEN_ROOF
         else if (strcmp(entry->fieldName.c_str(), SENS_MOIST1_NAME))
             returnData.moist1 = entry->fieldValue;
         else if (strcmp(entry->fieldName.c_str(), SENS_MOIST2_NAME))
             returnData.moist2 = entry->fieldValue;
         else if (strcmp(entry->fieldName.c_str(), SENS_MOIST3_NAME))
             returnData.moist3 = entry->fieldValue;
-        else if (strcmp(entry->fieldName.c_str(), SENS_WATER_NAME))
-            returnData.waterLvl = entry->fieldValue;
+#endif
         else
         {
             Serial.println("INCORRECT DATA SAVE");
@@ -99,10 +103,12 @@ void DataStore::reFormatData(DataObject &returnData, DataStore::StorageBlock dat
     returnData.items.push_back(new DataEntry(SENS_TEMP1_NAME, data.temp1));
     returnData.items.push_back(new DataEntry(SENS_TEMP2_NAME, data.temp2));
     returnData.items.push_back(new DataEntry(SENS_TEMP3_NAME, data.temp3));
+    returnData.items.push_back(new DataEntry(SENS_WATER_NAME, data.waterLvl));
+#ifdef GREEN_ROOF
     returnData.items.push_back(new DataEntry(SENS_MOIST1_NAME, data.moist1));
     returnData.items.push_back(new DataEntry(SENS_MOIST2_NAME, data.moist2));
     returnData.items.push_back(new DataEntry(SENS_MOIST3_NAME, data.moist3));
-    returnData.items.push_back(new DataEntry(SENS_WATER_NAME, data.waterLvl));
+#endif
 }
 
 void DataStore::appendData(DataStore::StorageBlock data)
@@ -156,10 +162,12 @@ void DataStore::loadDataStorage()
                           data.temp1,
                           data.temp2,
                           data.temp3,
+                          data.waterLvl,
+#ifdef GREEN_ROOF
                           data.moist1,
                           data.moist2,
                           data.moist3,
-                          data.waterLvl,
+#endif
                           data.timestamp);
             _retainedData.push_back(data);
         }

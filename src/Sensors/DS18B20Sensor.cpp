@@ -35,7 +35,12 @@ bool DS18B20Sensor::startMeasurement()
     }
 
     if (measurement == SENSOR_INVALID)
+    {
+        Serial.println("Measurement Invalid");
         return false;
+    }
+
+    Serial.printf("Raw value: %f\n", measurement);
 
     _sensorValue = (uint16_t)roundf(measurement * TEMPERATURE_MULTIPLICATION);
     return true;

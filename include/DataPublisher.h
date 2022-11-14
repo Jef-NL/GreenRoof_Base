@@ -133,6 +133,27 @@ private:
      **/
     void showTime(tm localTime);
 
+    /**
+     * @brief Remap value between output values (Linear)
+     * 
+     * @param x Input value to be remapped
+     * @param in_min Minimum input value equal to out_min
+     * @param in_max Maximum input value equal to out_max
+     * @param out_min Remapped min output
+     * @param out_max Remapped max output
+     * @return float Remapped value for input x
+    **/
+    float map(float x, float in_min, float in_max, float out_min, float out_max);
+
+    /**
+     * @brief Read battery level
+     *
+     * @return int16_t Battery level in %
+     **/
+#ifndef GREEN_ROOF
+    int16_t readBattery();
+#endif
+
     bool _connected;                 /**< Connections status */
     bool _disconnected;              /**< Disconnected during process */
     DataObject *_rawData;            /**< Raw data in struct */

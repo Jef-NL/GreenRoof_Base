@@ -49,21 +49,30 @@ void setup()
 
   // Create controller instance
   controller = new MeasurementController();
+
+  // Set transmission type
   // DataPublisher::INSTANCE()->setTransmissionMode(new HTTPTransmission());
   DataPublisher::INSTANCE()->setTransmissionMode(new IOTHubTransmission());
+
   // Create Bus instance
   sharedBus = new OneWireTemperatureBus(ONE_WIRE_BUS);
 
   // Add sensors                              |  Sensor name    |     Sensor type           |
-  controller->addSensor(new SensorBase::Sensor(SENS_TEMP1_NAME, new TestSensor(6)));
-  controller->addSensor(new SensorBase::Sensor(SENS_TEMP2_NAME, new TestSensor(18)));
-  // controller->addSensor(new SensorBase::Sensor(SENS_MOIST1_NAME, new MoistureSensor(MOIST1_PIN, MOIST1_VOLT)));
-  // controller->addSensor(new SensorBase::Sensor(SENS_MOIST2_NAME, new MoistureSensor(MOIST2_PIN, MOIST2_VOLT)));
-  // controller->addSensor(new SensorBase::Sensor(SENS_MOIST3_NAME, new MoistureSensor(MOIST3_PIN, MOIST3_VOLT)));
-  // controller->addSensor(new SensorBase::Sensor(SENS_TEMP1_NAME, new DS18B20Sensor(sharedBus, (uint64_t)4035225328881985576)));
-  // controller->addSensor(new SensorBase::Sensor(SENS_TEMP2_NAME, new DS18B20Sensor(sharedBus, (uint64_t)504403221035971880)));
-  // // controller->addSensor(new SensorBase::Sensor(SENS_TEMP3_NAME, new DS18B20Sensor(sharedBus, (uint64_t)0)));
-  // controller->addSensor(new SensorBase::Sensor(SENS_WATER_NAME, new WaterLevelSensor(WATER_ECHO_PIN, WATER_TRIGGER_PIN)));
+  // controller->addSensor(new SensorBase::Sensor(SENS_TEMP1_NAME, new TestSensor(6)));
+  // controller->addSensor(new SensorBase::Sensor(SENS_TEMP2_NAME, new TestSensor(18)));
+  controller->addSensor(new SensorBase::Sensor(SENS_WATER_NAME, new WaterLevelSensor(WATER_ECHO_PIN, WATER_TRIGGER_PIN)));
+#ifdef GREEN_ROOF
+  controller->addSensor(new SensorBase::Sensor(SENS_TEMP1_NAME, new DS18B20Sensor(sharedBus, (uint64_t)2594073448133232936)));  //(uint64_t)4035225328881985576))); // Green - Non Green
+  controller->addSensor(new SensorBase::Sensor(SENS_TEMP2_NAME, new DS18B20Sensor(sharedBus, (uint64_t)10160120822101062952))); //(uint64_t)16645304285521504040)));
+  controller->addSensor(new SensorBase::Sensor(SENS_TEMP3_NAME, new DS18B20Sensor(sharedBus, (uint64_t)15132094810723986984))); //(uint64_t)504403221035971880)));
+  controller->addSensor(new SensorBase::Sensor(SENS_MOIST1_NAME, new MoistureSensor(MOIST1_PIN, MOIST1_VOLT)));
+  controller->addSensor(new SensorBase::Sensor(SENS_MOIST2_NAME, new MoistureSensor(MOIST2_PIN, MOIST2_VOLT)));
+  controller->addSensor(new SensorBase::Sensor(SENS_MOIST3_NAME, new MoistureSensor(MOIST3_PIN, MOIST3_VOLT)));
+#else
+  controller->addSensor(new SensorBase::Sensor(SENS_TEMP1_NAME, new DS18B20Sensor(sharedBus, (uint64_t)4035225328881985576)));
+  controller->addSensor(new SensorBase::Sensor(SENS_TEMP2_NAME, new DS18B20Sensor(sharedBus, (uint64_t)16645304285521504040)));
+  controller->addSensor(new SensorBase::Sensor(SENS_TEMP3_NAME, new DS18B20Sensor(sharedBus, (uint64_t)504403221035971880)));
+#endif
 
   // Run measurements
   controller->runProcess();

@@ -18,7 +18,6 @@
    test or else use the SPIFFS plugin to create a partition
    https://github.com/me-no-dev/arduino-esp32fs-plugin */
 #define FORMAT_SPIFFS_IF_FAILED false
-
 #include "Settings/config.h"
 #include "DataObject.h"
 #include "Transmit/TransmissionBase.h"
@@ -44,10 +43,11 @@ public:
 
 public:
 #pragma pack(push, 1)
-    /**
-     * @brief Pre defined storage object for this device.
-     *
-     **/
+/**
+ * @brief Pre defined storage object for this device.
+ *
+ **/
+#ifdef GREEN_ROOF
     struct StorageBlock
     {
         int16_t temp1;      // 2 Bytes
@@ -59,6 +59,16 @@ public:
         int16_t waterLvl;   // 2 Bytes
         uint64_t timestamp; // 4 Bytes
     };
+#else
+    struct StorageBlock
+    {
+        int16_t temp1;      // 2 Bytes
+        int16_t temp2;      // 2 Bytes
+        int16_t temp3;      // 2 Bytes
+        int16_t waterLvl;   // 2 Bytes
+        uint64_t timestamp; // 4 Bytes
+    };
+#endif
 #pragma pack(pop)
 
     /**

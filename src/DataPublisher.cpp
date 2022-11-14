@@ -32,10 +32,11 @@ DataPublisher *DataPublisher::INSTANCE()
 void DataPublisher::wirelessConnect()
 {
     WiFi.mode(WIFI_STA);
-    if (channel > -1) {
+    if (channel > -1)
+    {
         WiFi.begin(WIFI_SSID, WIFI_PASSWORD, channel);
         Serial.println("PRESET CHANNEL");
-    }    
+    }
     else
         WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
     Serial.printf("Connecting to: %s\n", WIFI_SSID);
@@ -119,6 +120,9 @@ bool DataPublisher::sendData()
 
     // Update timestamp for measurement
     _rawData->timestamp = this->updateTimestamp();
+#ifndef GREEN_ROOF
+    _rawData->batteryLevel = this->readBattery();
+#endif
 
     if (this->_disconnected)
     {
@@ -129,7 +133,7 @@ bool DataPublisher::sendData()
     }
 
     // Send data away
-    if (!_dataEndpoint->transmitData(_rawData)) 
+    if (!_dataEndpoint->transmitData(_rawData))
     {
         Serial.println("Data failed to send...");
         _dataStorage->storeDataObject(*_rawData);
@@ -173,3 +177,32 @@ void DataPublisher::showTime(tm localTime)
                   localTime.tm_min,
                   localTime.tm_sec);
 }
+
+float DataPublisher::map(float x, float in_min, float in_max, float out_min, float out_max)
+{
+    float remappedValue = (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+    remappedValue = remappedValue > out_max ? out_max : remappedValue;
+    remappedValue = remappedValue < out_min ? out_min : remappedValue;
+    return remappedValue;
+}
+
+#ifndef GREEN_ROOF
+int16_t DataPublisher::readBattery()
+{
+    float factor = 1.0f / ((float)BATTERY_R2 / ((float)BATTERY_R1 + (float)BATTERY_R2));
+    float batteryConstant = factor * ((float)ESP_VOLTAGE_MV / (float)ANALOG_MAX_VALUE);
+
+    int measurementSum = 0;
+    for (int i = 0; i < ANALOG_SAMPLE_COUNT; i++)
+    {
+        uint16_t reading = analogRead(BATTERY_ANALOG_PIN);
+        measurementSum += (int)reading;
+        delay(ANALOG_SAMPLE_DELAY);
+    }
+
+    int analogRead = (uint16_t)(measurementSum / ANALOG_SAMPLE_COUNT);
+    float batteryVoltage = (float)analogRead * batteryConstant;
+
+    return (int16_t)this->map(batteryVoltage, BATTERY_MIN_VOLT, BATTERY_MAX_VOLT, 0, 100);
+}
+#endif

@@ -27,8 +27,8 @@ struct DataEntry
      **/
     DataEntry(String name, int value) : fieldName(name), fieldValue(value){};
 
-    String fieldName; /**< Field name string */
-    int16_t fieldValue;    /**< Field data int */
+    String fieldName;   /**< Field name string */
+    int16_t fieldValue; /**< Field data int */
 };
 
 /**
@@ -38,6 +38,9 @@ struct DataEntry
  **/
 struct DataObject
 {
-    time_t timestamp;               /**< Data timestamp */
+    time_t timestamp; /**< Data timestamp */
+#ifndef GREEN_ROOF
+    int16_t batteryLevel; /**< Battery level in % */
+#endif
     std::vector<DataEntry *> items; /**< List of data fields */
 };

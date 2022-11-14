@@ -10,6 +10,7 @@
  **/
 #pragma once
 #include <Arduino.h>
+#include <math.h>
 
 #include "SensorBase.h"
 
@@ -51,6 +52,8 @@ public:
     uint16_t getMeasurementResult() override;
 
 private:
+    float calculateWaterLevel(float mm);
+
     const uint8_t _echoPin;    /**< Echo pin */
     const uint8_t _triggerPin; /**< Trigger pin */
 };

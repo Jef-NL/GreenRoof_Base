@@ -4,27 +4,25 @@
  * @brief Transmission method for HTTP post transfers
  * @version 0.1
  * @date 2022-11-03
- * 
+ *
  * @copyright Copyright (c) 2022
- * 
+ *
  */
 #include "Transmit/HTTPTransmission.h"
 
 HTTPTransmission::HTTPTransmission()
 {
-
 }
 
 HTTPTransmission::~HTTPTransmission()
 {
-
 }
 
 bool HTTPTransmission::transmitData(DataObject *object, bool skipSetup)
 {
     if (object == nullptr)
         return false;
-    
+
     _dataObject = object;
 
     _httpClient.begin(String(WEBSERVER_URL));
@@ -41,7 +39,7 @@ bool HTTPTransmission::transmitData(DataObject *object, bool skipSetup)
         return true;
         break;
     case HTTP_CODE_UNPROCESSABLE_ENTITY:
-        Serial.printf("[HTTP] Unprocessable Entity. Data contains non integer type. %s\n", content);
+        Serial.printf("[HTTP] Unprocessable Entity. Data contains non integer type. %s\n", content.c_str());
         break;
     case HTTP_CODE_METHOD_NOT_ALLOWED:
         Serial.printf("[HTTP] Method not allowed. %d\n", response);
@@ -60,12 +58,15 @@ bool HTTPTransmission::transmitData(DataObject *object, bool skipSetup)
     return false;
 }
 
-String HTTPTransmission::parseData() 
+String HTTPTransmission::parseData()
 {
     DynamicJsonDocument doc(JSON_POST_DOC_SIZE);
 
     // Add timestamp
     doc[String(TIMESTAMP_NAME)] = this->_dataObject->timestamp;
+#ifndef GREEN_ROOF
+    doc[String(BATTERY_LVL_NAME)] = this->_dataObject->batteryLevel;
+#endif
 
     // Add sensor data
     for (auto entry : this->_dataObject->items)

@@ -37,9 +37,8 @@ bool WaterLevelSensor::startMeasurement()
 
     float distance = duration * ((float)SPEED_OF_SOUND_MS / 10000.0f) / 2.0f; // in cm
 
-    // ToDo: Calculate water level by bucket size (cm to ml)
-    // Capacity turncated cone or Cylinder
-    _sensorValue = (uint16_t)(distance * (float)WATER_LEVEL_MULTIPLICATION);
+    float waterMl = calculateWaterLevel(distance * 10.0);
+    _sensorValue = (uint16_t)(waterMl * (float)WATER_LEVEL_MULTIPLICATION);
 
     return true;
 }
@@ -47,4 +46,17 @@ bool WaterLevelSensor::startMeasurement()
 uint16_t WaterLevelSensor::getMeasurementResult()
 {
     return _sensorValue;
+}
+
+float WaterLevelSensor::calculateWaterLevel(float mm)
+{
+    float heightInCm = mm / 10.0;
+    float topDiam = BUCKET_TOP_WIDTH / 2.0;
+    float bottomDiam = BUCKET_BOTTOM_WIDTH / 2.0;
+    float bucketTaper = (topDiam - bottomDiam) / BUCKET_HEIGHT;
+
+    float rimSize = bottomDiam + (heightInCm * bucketTaper);
+    float waterLvlMillitre = (1.0 / 3.0 * PI) * heightInCm * (pow(rimSize, 2.0) + (rimSize * bottomDiam) + pow(bottomDiam, 2.0));
+   
+    return waterLvlMillitre;
 }

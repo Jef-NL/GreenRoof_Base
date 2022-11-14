@@ -77,6 +77,7 @@ void OneWireTemperatureBus::runMeasurements()
     if (millis() > _lastMeasurementStamp + MEASUREMENT_VALID_MS)
         return;
 
+    Serial.println("Running measurement...");
     _lastMeasurementStamp = millis();
     _connectedSensors->requestTemperatures();
 }

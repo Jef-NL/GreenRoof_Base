@@ -115,7 +115,7 @@ bool IOTHubTransmission::transmitData(DataObject *object, bool skipSetup)
 void IOTHubTransmission::close()
 {
     uint16_t timeout = 0;
-    while(pubCount > 0)
+    while (pubCount > 0)
     {
         delay(10);
         timeout++;
@@ -214,6 +214,9 @@ String IOTHubTransmission::parseData()
 
     // Add timestamp
     doc[String(TIMESTAMP_NAME)] = this->_dataObject->timestamp;
+#ifndef GREEN_ROOF
+    doc[String(BATTERY_LVL_NAME)] = this->_dataObject->batteryLevel;
+#endif
 
     // Add sensor data
     for (auto entry : this->_dataObject->items)
