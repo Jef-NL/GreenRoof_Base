@@ -32,17 +32,24 @@ void DataStore::storeDataObject(DataObject data)
     Serial.println("Storing measurement locally.");
     StorageBlock storeData = this->formatData(data);
     this->appendData(storeData);
+#ifdef GREEN_ROOF
     Serial.printf("Wrote: %d, %d, %d, %d, %d, %d, %d, %llu\n",
                   storeData.temp1,
                   storeData.temp2,
                   storeData.temp3,
                   storeData.waterLvl,
-#ifdef GREEN_ROOF
                   storeData.moist1,
                   storeData.moist2,
                   storeData.moist3,
-#endif
                   storeData.timestamp);
+#else
+    Serial.printf("Wrote: %d, %d, %d, %d, %llu\n",
+                  storeData.temp1,
+                  storeData.temp2,
+                  storeData.temp3,
+                  storeData.waterLvl,
+                  storeData.timestamp);
+#endif
 }
 
 void DataStore::transmitDataStorage(TransmissionBase *endpoint)
@@ -157,18 +164,27 @@ void DataStore::loadDataStorage()
 
         if (file.read((uint8_t *)&data, sizeof(StorageBlock)))
         {
+#ifdef GREEN_ROOF
             Serial.printf("Read(%d): %d, %d, %d, %d, %d, %d, %d, %llu\n",
                           i,
                           data.temp1,
                           data.temp2,
                           data.temp3,
                           data.waterLvl,
-#ifdef GREEN_ROOF
                           data.moist1,
                           data.moist2,
                           data.moist3,
-#endif
                           data.timestamp);
+#else
+            Serial.printf("Read(%d): %d, %d, %d, %d, %llu\n",
+                          i,
+                          data.temp1,
+                          data.temp2,
+                          data.temp3,
+                          data.waterLvl,
+                          data.timestamp);
+#endif
+
             _retainedData.push_back(data);
         }
         else
