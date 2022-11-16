@@ -79,20 +79,20 @@ DataStore::StorageBlock DataStore::formatData(DataObject data)
 
     for (auto entry : data.items)
     {
-        if (strcmp(entry->fieldName.c_str(), SENS_TEMP1_NAME))
+        if (strcmp(entry->fieldName.c_str(), SENS_TEMP1_NAME) == 0)
             returnData.temp1 = entry->fieldValue;
-        else if (strcmp(entry->fieldName.c_str(), SENS_TEMP2_NAME))
+        else if (strcmp(entry->fieldName.c_str(), SENS_TEMP2_NAME) == 0)
             returnData.temp2 = entry->fieldValue;
-        else if (strcmp(entry->fieldName.c_str(), SENS_TEMP3_NAME))
+        else if (strcmp(entry->fieldName.c_str(), SENS_TEMP3_NAME) == 0)
             returnData.temp3 = entry->fieldValue;
-        else if (strcmp(entry->fieldName.c_str(), SENS_WATER_NAME))
+        else if (strcmp(entry->fieldName.c_str(), SENS_WATER_NAME) == 0)
             returnData.waterLvl = entry->fieldValue;
 #ifdef GREEN_ROOF
-        else if (strcmp(entry->fieldName.c_str(), SENS_MOIST1_NAME))
+        else if (strcmp(entry->fieldName.c_str(), SENS_MOIST1_NAME) == 0)
             returnData.moist1 = entry->fieldValue;
-        else if (strcmp(entry->fieldName.c_str(), SENS_MOIST2_NAME))
+        else if (strcmp(entry->fieldName.c_str(), SENS_MOIST2_NAME) == 0)
             returnData.moist2 = entry->fieldValue;
-        else if (strcmp(entry->fieldName.c_str(), SENS_MOIST3_NAME))
+        else if (strcmp(entry->fieldName.c_str(), SENS_MOIST3_NAME) == 0)
             returnData.moist3 = entry->fieldValue;
 #endif
         else

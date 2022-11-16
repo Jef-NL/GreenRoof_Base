@@ -50,14 +50,15 @@ bool MeasurementController::runMeasurements()
     if (_sensors.size() <= 0)
         return false;
 
+    bool success = true;
     for (auto sensorReg : _sensors)
     {
         // Run measurement for all sensors
         if (!sensorReg->sensor->startMeasurement())
-            return false;
+            success = false;
     }
 
-    return true;
+    return success;
 }
 
 bool MeasurementController::publishMeasurements()

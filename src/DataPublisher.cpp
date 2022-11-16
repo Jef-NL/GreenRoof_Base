@@ -189,7 +189,8 @@ float DataPublisher::map(float x, float in_min, float in_max, float out_min, flo
 #ifndef GREEN_ROOF
 int16_t DataPublisher::readBattery()
 {
-    float factor = 1.0f / ((float)BATTERY_R2 / ((float)BATTERY_R1 + (float)BATTERY_R2));
+    //float factor = 1.0f / ((float)BATTERY_R2 / ((float)BATTERY_R1 + (float)BATTERY_R2));
+    float factor = 4.85f; // 4.6 is origin
     float batteryConstant = factor * ((float)ESP_VOLTAGE_MV / (float)ANALOG_MAX_VALUE);
 
     int measurementSum = 0;
@@ -203,6 +204,17 @@ int16_t DataPublisher::readBattery()
     int analogRead = (uint16_t)(measurementSum / ANALOG_SAMPLE_COUNT);
     float batteryVoltage = (float)analogRead * batteryConstant;
 
-    return (int16_t)this->map(batteryVoltage, BATTERY_MIN_VOLT, BATTERY_MAX_VOLT, 0, 100);
+    int16_t batteryLevel = (int16_t)this->map(batteryVoltage, BATTERY_MIN_VOLT, BATTERY_MAX_VOLT, 0, 100);
+    
+    Serial.printf("[BATTERY] > Pro: %d V: %f \n", batteryLevel, batteryVoltage);
+    #ifdef BATTERY_SAFETY_ENABLE
+    if (batteryLevel < MIN_BATTERY_LEVEL)
+    {
+        Serial.printf("[BATTERY ALERT] > Voltage to low Pro: %d V: %f \n Going to sleep.", batteryLevel, batteryVoltage);
+        esp_deep_sleep_start();
+    }
+    #endif
+    
+    return batteryLevel;
 }
 #endif

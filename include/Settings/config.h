@@ -28,10 +28,12 @@
 // Battery
 #define BATTERY_LVL_NAME "intBatteryPercentage" /**< Battery percentage name for database storage */
 #define BATTERY_ANALOG_PIN 34                   /**< Analog pin for battery measurement on non green roof */
-#define BATTERY_R1 357000                       /**< Voltage divider R1 */
+#define BATTERY_R1 360000                       /**< Voltage divider R1 */
 #define BATTERY_R2 100000                       /**< Voltage divider R2 */
-#define BATTERY_MAX_VOLT 12.89                  /**< Max lead-asset battery voltage */
-#define BATTERY_MIN_VOLT 11.63                  /**< Absolute minimum lead-asset battery voltage*/
+#define BATTERY_MAX_VOLT 12890                  /**< Max lead-asset battery voltage */
+#define BATTERY_MIN_VOLT 11500                  /**< Absolute minimum lead-asset battery voltage*/
+#define MIN_BATTERY_LEVEL 30 /**< Minimum operation battery level in % */
+//#define BATTERY_SAFETY_ENABLE /**< Define if system should enter deepsleep if battery gets below set precentage */
 
 // Temperature sensor DS18B20
 #define ONE_WIRE_BUS 4                    /**< Hardware pin address for OneWire bus */

@@ -60,7 +60,7 @@ void setup()
   // Add sensors                              |  Sensor name    |     Sensor type           |
   // controller->addSensor(new SensorBase::Sensor(SENS_TEMP1_NAME, new TestSensor(6)));
   // controller->addSensor(new SensorBase::Sensor(SENS_TEMP2_NAME, new TestSensor(18)));
-  controller->addSensor(new SensorBase::Sensor(SENS_WATER_NAME, new WaterLevelSensor(WATER_ECHO_PIN, WATER_TRIGGER_PIN)));
+  //controller->addSensor(new SensorBase::Sensor(SENS_WATER_NAME, new WaterLevelSensor(WATER_ECHO_PIN, WATER_TRIGGER_PIN)));
 #ifdef GREEN_ROOF
   controller->addSensor(new SensorBase::Sensor(SENS_TEMP1_NAME, new DS18B20Sensor(sharedBus, (uint64_t)2594073448133232936)));  //(uint64_t)4035225328881985576))); // Green - Non Green
   controller->addSensor(new SensorBase::Sensor(SENS_TEMP2_NAME, new DS18B20Sensor(sharedBus, (uint64_t)10160120822101062952))); //(uint64_t)16645304285521504040)));
