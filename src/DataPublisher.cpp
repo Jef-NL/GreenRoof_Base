@@ -35,11 +35,11 @@ void DataPublisher::wirelessConnect()
     if (channel > -1)
     {
         WiFi.begin(WIFI_SSID, WIFI_PASSWORD, channel);
-        Serial.println("PRESET CHANNEL");
     }
     else
         WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
-    Serial.printf("Connecting to: %s\n", WIFI_SSID);
+
+    NETWORK_LOG("Connecting to: %s\n", WIFI_SSID);
     WiFi.onEvent(DataPublisher::wirelessEvent);
 }
 
@@ -60,29 +60,28 @@ void DataPublisher::wirelessEvent(WiFiEvent_t event, WiFiEventInfo_t info)
     switch (event)
     {
     case SYSTEM_EVENT_WIFI_READY:
-        Serial.println("WiFi interface ready");
+        NETWORK_LOG("WiFi interface ready\n");
         break;
     case SYSTEM_EVENT_STA_CONNECTED:
-        Serial.println("Connected to WiFi network");
+        NETWORK_LOG("Connected to WiFi network\n");
         break;
     case SYSTEM_EVENT_STA_GOT_IP:
-        Serial.print("IP Address: ");
-        Serial.println(WiFi.localIP());
-        Serial.printf("Channel %d\n", WiFi.channel());
+        NETWORK_LOG("IP: %d.%d.%d.%d\n", WiFi.localIP()[0], WiFi.localIP()[1], WiFi.localIP()[2], WiFi.localIP()[3]);
+        NETWORK_LOG("Channel %d\n", WiFi.channel());
         channel = WiFi.channel();
         DataPublisher::INSTANCE()->_connected = true;
         break;
     case SYSTEM_EVENT_STA_DISCONNECTED:
     case SYSTEM_EVENT_STA_LOST_IP:
-        Serial.println("Disconnected from WiFi network");
+        NETWORK_WARN("Disconnected from WiFi network\n");
         DataPublisher::INSTANCE()->_connected = false;
         DataPublisher::INSTANCE()->_disconnected = true;
         break;
     case SYSTEM_EVENT_STA_STOP:
-        Serial.println("Connection closed");
+        NETWORK_LOG("Connection closed\n");
         break;
     default:
-        Serial.printf("[WiFi-event] Unhandeled event: %d\n", event);
+        NETWORK_WARN("[WiFi-event] Unhandeled event: %d\n", event);
         break;
     }
 }
@@ -106,7 +105,7 @@ void DataPublisher::addData(String fieldName, int fieldValue)
     }
 
     _rawData->items.push_back(new DataEntry(fieldName, fieldValue));
-    Serial.printf("Stored field: %s Data: %d\n", fieldName.c_str(), fieldValue);
+    MEASURE_LOG("Set Data: %s Value: %d\n", fieldName.c_str(), fieldValue);
 }
 
 bool DataPublisher::sendData()
@@ -126,7 +125,7 @@ bool DataPublisher::sendData()
 
     if (this->_disconnected)
     {
-        Serial.println("Connecting failed, Got disconnected...");
+        NETWORK_WARN("Connecting failed, Got disconnected...\n");
         channel = -1;
         _dataStorage->storeDataObject(*_rawData);
         return false;
@@ -135,7 +134,7 @@ bool DataPublisher::sendData()
     // Send data away
     if (!_dataEndpoint->transmitData(_rawData))
     {
-        Serial.println("Data failed to send...");
+        PUBLISH_WARN("Data failed to send...\n");
         _dataStorage->storeDataObject(*_rawData);
         return false;
     }
@@ -169,7 +168,7 @@ time_t DataPublisher::updateTimestamp()
 
 void DataPublisher::showTime(tm localTime)
 {
-    Serial.printf("%02d-%02d-%04d %02d:%02d:%02d\n",
+    DEBUG_LOG("[TIME] %02d-%02d-%04d %02d:%02d:%02d\n",
                   localTime.tm_mday,
                   localTime.tm_mon + 1,
                   localTime.tm_year + 1900,
@@ -206,15 +205,22 @@ int16_t DataPublisher::readBattery()
 
     int16_t batteryLevel = (int16_t)this->map(batteryVoltage, BATTERY_MIN_VOLT, BATTERY_MAX_VOLT, 0, 100);
     
-    Serial.printf("[BATTERY] > Pro: %d V: %f \n", batteryLevel, batteryVoltage);
+    DEBUG_LOG("[BATTERY] > Pro: %d V: %f \n", batteryLevel, batteryVoltage);
     #ifdef BATTERY_SAFETY_ENABLE
     if (batteryLevel < MIN_BATTERY_LEVEL)
     {
-        Serial.printf("[BATTERY ALERT] > Voltage to low Pro: %d V: %f \n Going to sleep.", batteryLevel, batteryVoltage);
+        DEBUG_WARN("[BATTERY ALERT] > Voltage to low Pro: %d V: %f \n Going to sleep.", batteryLevel, batteryVoltage);
         esp_deep_sleep_start();
     }
     #endif
     
+    _batteryLevel = batteryLevel;
+
     return batteryLevel;
+}
+
+int16_t DataPublisher::getBatteryPercentage()
+{
+    return _batteryLevel;
 }
 #endif

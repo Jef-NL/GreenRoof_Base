@@ -9,12 +9,13 @@
  *
  **/
 #include "DataStore.h"
+#include "DataPublisher.h"
 
 DataStore::DataStore() : _fileSystem(SPIFFS)
 {
     if (!SPIFFS.begin(FORMAT_SPIFFS_IF_FAILED))
     {
-        Serial.println("SPIFFS Mount Failed");
+        DEBUG_WARN("SPIFFS Mount Failed\n");
     }
 }
 
@@ -29,11 +30,11 @@ bool DataStore::dataAvailable()
 
 void DataStore::storeDataObject(DataObject data)
 {
-    Serial.println("Storing measurement locally.");
+    DEBUG_LOG("Storing measurement locally.\n");
     StorageBlock storeData = this->formatData(data);
     this->appendData(storeData);
 #ifdef GREEN_ROOF
-    Serial.printf("Wrote: %d, %d, %d, %d, %d, %d, %d, %llu\n",
+    DEBUG_LOG("Wrote: %d, %d, %d, %d, %d, %d, %d, %llu\n",
                   storeData.temp1,
                   storeData.temp2,
                   storeData.temp3,
@@ -43,7 +44,7 @@ void DataStore::storeDataObject(DataObject data)
                   storeData.moist3,
                   storeData.timestamp);
 #else
-    Serial.printf("Wrote: %d, %d, %d, %d, %llu\n",
+    DEBUG_LOG("Wrote: %d, %d, %d, %d, %llu\n",
                   storeData.temp1,
                   storeData.temp2,
                   storeData.temp3,
@@ -63,7 +64,7 @@ void DataStore::transmitDataStorage(TransmissionBase *endpoint)
         this->reFormatData(transmissionData, object);
         if (!endpoint->transmitData(&transmissionData, true))
         {
-            Serial.println("Failed to send data from storage");
+            DEBUG_WARN("Failed to send data from storage\n");
             return;
         }
     }
@@ -75,7 +76,7 @@ void DataStore::transmitDataStorage(TransmissionBase *endpoint)
 DataStore::StorageBlock DataStore::formatData(DataObject data)
 {
     StorageBlock returnData = {0};
-    returnData.timestamp = data.timestamp;
+    returnData.timestamp = (uint64_t)data.timestamp;
 
     for (auto entry : data.items)
     {
@@ -97,7 +98,7 @@ DataStore::StorageBlock DataStore::formatData(DataObject data)
 #endif
         else
         {
-            Serial.println("INCORRECT DATA SAVE");
+            DEBUG_WARN("INCORRECT DATA SAVE\n");
         }
     }
 
@@ -106,7 +107,7 @@ DataStore::StorageBlock DataStore::formatData(DataObject data)
 
 void DataStore::reFormatData(DataObject &returnData, DataStore::StorageBlock data)
 {
-    returnData.timestamp = data.timestamp;
+    returnData.timestamp = (time_t)data.timestamp;
     returnData.items.push_back(new DataEntry(SENS_TEMP1_NAME, data.temp1));
     returnData.items.push_back(new DataEntry(SENS_TEMP2_NAME, data.temp2));
     returnData.items.push_back(new DataEntry(SENS_TEMP3_NAME, data.temp3));
@@ -115,6 +116,8 @@ void DataStore::reFormatData(DataObject &returnData, DataStore::StorageBlock dat
     returnData.items.push_back(new DataEntry(SENS_MOIST1_NAME, data.moist1));
     returnData.items.push_back(new DataEntry(SENS_MOIST2_NAME, data.moist2));
     returnData.items.push_back(new DataEntry(SENS_MOIST3_NAME, data.moist3));
+#else
+    returnData.batteryLevel = DataPublisher::INSTANCE()->getBatteryPercentage();
 #endif
 }
 
@@ -123,17 +126,17 @@ void DataStore::appendData(DataStore::StorageBlock data)
     File file = _fileSystem.open(STORAGE_FILE, FILE_APPEND);
     if (!file)
     {
-        Serial.println("- failed to open file for writing");
+        DEBUG_WARN("- failed to open file for writing\n");
         return;
     }
 
     if (file.write((uint8_t *)&data, sizeof(DataStore::StorageBlock)))
     {
-        Serial.println("- Data stored locally");
+        DEBUG_LOG("- Data stored locally\n");
     }
     else
     {
-        Serial.println("- Data store failed...");
+        DEBUG_WARN("- Data store failed...\n");
     }
     file.close();
 }
@@ -145,13 +148,13 @@ void DataStore::loadDataStorage()
     uint16_t items = 0;
     if (!file)
     {
-        Serial.println("- failed to open file for Reading");
+        DEBUG_WARN("- failed to open file for Reading\n");
         return;
     }
     else
     {
         fileSize = file.size();
-        Serial.printf("File size: %d\n", fileSize);
+        DEBUG_LOG("File size: %d\n", fileSize);
     }
 
     // Calculate Items
@@ -165,7 +168,7 @@ void DataStore::loadDataStorage()
         if (file.read((uint8_t *)&data, sizeof(StorageBlock)))
         {
 #ifdef GREEN_ROOF
-            Serial.printf("Read(%d): %d, %d, %d, %d, %d, %d, %d, %llu\n",
+            DEBUG_LOG("Read(%d): %d, %d, %d, %d, %d, %d, %d, %llu\n",
                           i,
                           data.temp1,
                           data.temp2,
@@ -176,7 +179,7 @@ void DataStore::loadDataStorage()
                           data.moist3,
                           data.timestamp);
 #else
-            Serial.printf("Read(%d): %d, %d, %d, %d, %llu\n",
+            DEBUG_LOG("Read(%d): %d, %d, %d, %d, %llu\n",
                           i,
                           data.temp1,
                           data.temp2,
@@ -189,7 +192,7 @@ void DataStore::loadDataStorage()
         }
         else
         {
-            Serial.println("Read failed");
+            DEBUG_WARN("Read failed\n");
         }
     }
 
@@ -200,10 +203,10 @@ void DataStore::deleteDataStorage()
 {
     if (_fileSystem.remove(STORAGE_FILE))
     {
-        Serial.println("- file deleted");
+        DEBUG_LOG("- file deleted\n");
     }
     else
     {
-        Serial.println("- delete failed");
+        DEBUG_WARN("- delete failed\n");
     }
 }

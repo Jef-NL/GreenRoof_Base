@@ -11,6 +11,7 @@
 #pragma once
 #include <Arduino.h>
 #include <vector>
+#include "Settings/config.h"
 
 /**
  * @brief Data field
@@ -36,11 +37,17 @@ struct DataEntry
  *
  * Object containing a list of DataEntries
  **/
+#ifdef GREEN_ROOF
 struct DataObject
 {
     time_t timestamp; /**< Data timestamp */
-#ifndef GREEN_ROOF
-    int16_t batteryLevel; /**< Battery level in % */
-#endif
     std::vector<DataEntry *> items; /**< List of data fields */
 };
+#else
+struct DataObject
+{
+    time_t timestamp; /**< Data timestamp */
+    int16_t batteryLevel; /**< Battery level in % */
+    std::vector<DataEntry *> items; /**< List of data fields */
+};
+#endif

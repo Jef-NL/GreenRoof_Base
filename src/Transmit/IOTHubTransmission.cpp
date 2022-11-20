@@ -70,13 +70,13 @@ bool IOTHubTransmission::transmitData(DataObject *object, bool skipSetup)
     strncpy(dataArray, _parsedData.c_str(), length);
     az_span data = AZ_SPAN_FROM_BUFFER(dataArray);
 
-    Serial.println("Sending telemetry ...");
+    PUBLISH_LOG("Sending telemetry ...\n");
 
     // Gather MQTT topic
     if (az_result_failed(az_iot_hub_client_telemetry_get_publish_topic(
             &client, NULL, telemetry_topic, sizeof(telemetry_topic), NULL)))
     {
-        Serial.println("Failed az_iot_hub_client_telemetry_get_publish_topic");
+        PUBLISH_WARN("Failed az_iot_hub_client_telemetry_get_publish_topic\n");
         return false;
     }
 
@@ -88,23 +88,23 @@ bool IOTHubTransmission::transmitData(DataObject *object, bool skipSetup)
             MQTT_QOS1,
             DO_NOT_RETAIN_MSG) == 0)
     {
-        Serial.println("Failed publishing");
+        PUBLISH_WARN("Failed publishing\n");
         return false;
     }
 
     uint16_t timeout = 0;
     while (!connected)
     {
-        Serial.print(".");
+        DEBUG_LOG(".");
         delay(10);
         timeout++;
         if (timeout > 200)
         {
-            Serial.println("MQTT publish failed");
+            PUBLISH_WARN("MQTT publish failed\n");
             return false;
         }
     };
-    Serial.println("Published data");
+    PUBLISH_LOG("Published data\n");
     pubCount++;
     _parsedData = "";
     _dataObject = nullptr;
@@ -121,24 +121,12 @@ void IOTHubTransmission::close()
         timeout++;
         if (timeout > (TIME_TO_SLEEP * 100))
         {
-            Serial.println("MQTT publish Never finished before new measurement");
+            PUBLISH_WARN("MQTT publish Never finished before new measurement\n");
             break;
         }
     }
 
     (void)esp_mqtt_client_destroy(mqttClient);
-}
-
-void receivedCallback(char *topic, byte *payload, unsigned int length)
-{
-    Serial.print("Received [");
-    Serial.print(topic);
-    Serial.print("]: ");
-    for (int i = 0; i < length; i++)
-    {
-        Serial.print((char)payload[i]);
-    }
-    Serial.println("");
 }
 
 esp_err_t IOTHubTransmission::mqtt_event_handler(esp_mqtt_event_handle_t event)
@@ -148,11 +136,11 @@ esp_err_t IOTHubTransmission::mqtt_event_handler(esp_mqtt_event_handle_t event)
         int i, r;
 
     case MQTT_EVENT_ERROR:
-        Serial.println("MQTT event MQTT_EVENT_ERROR");
+        PUBLISH_WARN("MQTT event MQTT_EVENT_ERROR\n");
         connected = false;
         break;
     case MQTT_EVENT_CONNECTED:
-        Serial.println("MQTT event MQTT_EVENT_CONNECTED");
+        PUBLISH_LOG("MQTT event MQTT_EVENT_CONNECTED\n");
         connected = true;
         // r = esp_mqtt_client_subscribe(mqttClient, AZ_IOT_HUB_CLIENT_C2D_SUBSCRIBE_TOPIC, 1);
         // if (r == -1)
@@ -166,42 +154,42 @@ esp_err_t IOTHubTransmission::mqtt_event_handler(esp_mqtt_event_handle_t event)
 
         break;
     case MQTT_EVENT_DISCONNECTED:
-        Serial.println("MQTT event MQTT_EVENT_DISCONNECTED");
+        PUBLISH_LOG("MQTT event MQTT_EVENT_DISCONNECTED\n");
         connected = false;
         break;
     case MQTT_EVENT_SUBSCRIBED:
-        Serial.println("MQTT event MQTT_EVENT_SUBSCRIBED");
+        PUBLISH_LOG("MQTT event MQTT_EVENT_SUBSCRIBED\n");
         break;
     case MQTT_EVENT_UNSUBSCRIBED:
-        Serial.println("MQTT event MQTT_EVENT_UNSUBSCRIBED");
+        PUBLISH_LOG("MQTT event MQTT_EVENT_UNSUBSCRIBED\n");
         break;
     case MQTT_EVENT_PUBLISHED:
-        Serial.println("MQTT event MQTT_EVENT_PUBLISHED");
+        PUBLISH_LOG("MQTT event MQTT_EVENT_PUBLISHED\n");
         pubCount--;
         break;
     case MQTT_EVENT_DATA:
-        Serial.println("MQTT event MQTT_EVENT_DATA");
+        PUBLISH_LOG("MQTT event MQTT_EVENT_DATA\n");
 
         for (i = 0; i < (INCOMING_DATA_BUFFER_SIZE - 1) && i < event->topic_len; i++)
         {
             incoming_data[i] = event->topic[i];
         }
         incoming_data[i] = '\0';
-        Serial.println("Topic: " + String(incoming_data));
+        DEBUG_LOG("Topic: %s\n", String(incoming_data).c_str());
 
         for (i = 0; i < (INCOMING_DATA_BUFFER_SIZE - 1) && i < event->data_len; i++)
         {
             incoming_data[i] = event->data[i];
         }
         incoming_data[i] = '\0';
-        Serial.println("Data: " + String(incoming_data));
+        DEBUG_LOG("Data: %s\n", String(incoming_data).c_str());
 
         break;
     case MQTT_EVENT_BEFORE_CONNECT:
-        Serial.println("MQTT event MQTT_EVENT_BEFORE_CONNECT");
+        PUBLISH_LOG("MQTT event MQTT_EVENT_BEFORE_CONNECT\n");
         break;
     default:
-        Serial.println("MQTT event UNKNOWN");
+        PUBLISH_WARN("MQTT event UNKNOWN\n");
         break;
     }
 
@@ -214,7 +202,10 @@ String IOTHubTransmission::parseData()
 
     // Add timestamp
     doc[String(TIMESTAMP_NAME)] = this->_dataObject->timestamp;
-#ifndef GREEN_ROOF
+#ifdef GREEN_ROOF
+    doc["deviceId"] = "GREEN";
+#else
+    doc["deviceId"] = "NORMAL";
     doc[String(BATTERY_LVL_NAME)] = this->_dataObject->batteryLevel;
 #endif
 
@@ -229,7 +220,7 @@ String IOTHubTransmission::parseData()
     serializeJson(doc, _parsedData);
 
     // DEBUG
-    Serial.println(_parsedData);
+    PUBLISH_LOG("%s\n", _parsedData.c_str());
 
     return String(_parsedData);
 }
@@ -245,7 +236,7 @@ void IOTHubTransmission::initIotHubClient()
             az_span_create((uint8_t *)device_id, strlen(device_id)),
             &options)))
     {
-        Serial.println("Failed initializing Azure IoT Hub client");
+        PUBLISH_WARN("Failed initializing Azure IoT Hub client\n");
         return;
     }
 
@@ -253,26 +244,26 @@ void IOTHubTransmission::initIotHubClient()
     if (az_result_failed(az_iot_hub_client_get_client_id(
             &client, mqtt_client_id, sizeof(mqtt_client_id) - 1, &client_id_length)))
     {
-        Serial.println("Failed getting client id");
+        PUBLISH_WARN("Failed getting client id\n");
         return;
     }
 
     if (az_result_failed(az_iot_hub_client_get_user_name(
             &client, mqtt_username, sizeofarray(mqtt_username), NULL)))
     {
-        Serial.println("Failed to get MQTT clientId, return code");
+        PUBLISH_WARN("Failed to get MQTT clientId, return code\n");
         return;
     }
 
-    Serial.println("Client ID: " + String(mqtt_client_id));
-    Serial.println("Username: " + String(mqtt_username));
+    DEBUG_LOG("[MQTT] Client ID: %s\n", String(mqtt_client_id).c_str());
+    DEBUG_LOG("[MQTT] Username: %s\n", String(mqtt_username).c_str());
 }
 
 int IOTHubTransmission::initMqttClient()
 {
     if (sasToken.Generate(SAS_TOKEN_DURATION_IN_MINUTES) != 0)
     {
-        Serial.println("Failed generating SAS token");
+        PUBLISH_WARN("Failed generating SAS token\n");
         return 1;
     }
 
@@ -295,7 +286,7 @@ int IOTHubTransmission::initMqttClient()
 
     if (mqttClient == NULL)
     {
-        Serial.println("Failed creating mqtt client");
+        PUBLISH_WARN("Failed creating mqtt client\n");
         return 1;
     }
 
@@ -303,12 +294,12 @@ int IOTHubTransmission::initMqttClient()
 
     if (start_result != ESP_OK)
     {
-        Serial.println("Could not start mqtt client; error code:" + start_result);
+        PUBLISH_WARN("Could not start mqtt client; error code: %d\n", start_result);
         return 1;
     }
     else
     {
-        Serial.println("MQTT client started");
+        PUBLISH_LOG("MQTT client started\n");
         return 0;
     }
 }

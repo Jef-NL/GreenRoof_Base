@@ -36,7 +36,7 @@ bool DS18B20Sensor::startMeasurement()
 
     if (measurement == SENSOR_INVALID)
     {
-        Serial.println("Measurement Invalid");
+        DEBUG_WARN("Measurement Invalid\n");
         return false;
     }
 

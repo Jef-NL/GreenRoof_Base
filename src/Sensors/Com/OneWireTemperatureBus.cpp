@@ -10,8 +10,10 @@
  **/
 #include "Sensors/Com/OneWireTemperatureBus.h"
 
-OneWireTemperatureBus::OneWireTemperatureBus(uint8_t busPin) : _deviceCount(0), _lastMeasurementStamp(0)
+OneWireTemperatureBus::OneWireTemperatureBus(uint8_t busPin) : _deviceCount(0)
 {
+    _lastMeasurementStamp = millis() - MEASUREMENT_VALID_MS;
+
     // Init bus
     _oneWireBus = new OneWire(busPin);
     _connectedSensors = new DallasTemperature(_oneWireBus);
@@ -26,7 +28,7 @@ OneWireTemperatureBus::OneWireTemperatureBus(uint8_t busPin) : _deviceCount(0), 
         if (!_connectedSensors->getAddress(addr, _deviceCount))
             break;
 
-        Serial.printf("Found Temperature Bus device - Address: %llu \n", this->addressArrayToUint64(addr));
+        MEASURE_LOG("Found Temperature Bus device - Address: %llu \n", this->addressArrayToUint64(addr));
     }
 }
 
@@ -74,10 +76,10 @@ float OneWireTemperatureBus::getTemperatureForAddress(uint64_t address)
 
 void OneWireTemperatureBus::runMeasurements()
 {
-    if (millis() > _lastMeasurementStamp + MEASUREMENT_VALID_MS)
+    if (millis() < _lastMeasurementStamp + MEASUREMENT_VALID_MS)
         return;
 
-    Serial.println("Running measurement...");
+    MEASURE_LOG("Running measurement...\n");
     _lastMeasurementStamp = millis();
     _connectedSensors->requestTemperatures();
 }

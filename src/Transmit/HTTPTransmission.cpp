@@ -35,23 +35,23 @@ bool HTTPTransmission::transmitData(DataObject *object, bool skipSetup)
     switch (response)
     {
     case HTTP_CODE_OK:
-        Serial.printf("[HTTP] Success %d\n", response);
+        PUBLISH_LOG("[HTTP] Success %d\n", response);
         return true;
         break;
     case HTTP_CODE_UNPROCESSABLE_ENTITY:
-        Serial.printf("[HTTP] Unprocessable Entity. Data contains non integer type. %s\n", content.c_str());
+        PUBLISH_WARN("[HTTP] Unprocessable Entity. Data contains non integer type. %s\n", content.c_str());
         break;
     case HTTP_CODE_METHOD_NOT_ALLOWED:
-        Serial.printf("[HTTP] Method not allowed. %d\n", response);
+        PUBLISH_WARN("[HTTP] Method not allowed. %d\n", response);
         break;
     case HTTP_CODE_BAD_REQUEST:
-        Serial.printf("[HTTP] Content type or payload not correctly formatted. %d\n", response);
+        PUBLISH_WARN("[HTTP] Content type or payload not correctly formatted. %d\n", response);
         break;
     case HTTP_CODE_SERVICE_UNAVAILABLE:
-        Serial.printf("[HTTP] Service Unavalible. Database might be offline. %d\n", response);
+        PUBLISH_WARN("[HTTP] Service Unavalible. Database might be offline. %d\n", response);
         break;
     default:
-        Serial.printf("Unhandled HTTP response: %d\n", response);
+        PUBLISH_WARN("Unhandled HTTP response: %d\n", response);
         break;
     }
 
@@ -79,7 +79,7 @@ String HTTPTransmission::parseData()
     serializeJson(doc, _parsedData);
 
     // DEBUG
-    Serial.println(_parsedData);
+    PUBLISH_LOG("%s\n", _parsedData.c_str());
 
     return String(_parsedData);
 }

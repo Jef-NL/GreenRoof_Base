@@ -106,6 +106,15 @@ public:
      **/
     bool sendData();
 
+    #ifndef GREEN_ROOF
+    /**
+     * @brief Get the Battery Percentage 
+     * 
+     * @return int16_t Last measured percentage
+     */
+    int16_t getBatteryPercentage();
+    #endif
+
 private:
     /**
      * @brief Private constructor
@@ -145,13 +154,15 @@ private:
     **/
     float map(float x, float in_min, float in_max, float out_min, float out_max);
 
+#ifndef GREEN_ROOF
     /**
      * @brief Read battery level
      *
      * @return int16_t Battery level in %
      **/
-#ifndef GREEN_ROOF
     int16_t readBattery();
+
+    int16_t _batteryLevel; /**< Last measured battery level */
 #endif
 
     bool _connected;                 /**< Connections status */

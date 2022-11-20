@@ -10,11 +10,12 @@
  **/
 #pragma once
 #include "keys.h"
+#include "Debug.h"
 
 // Sleep time
-#define TIME_TO_SLEEP 60 /**< Time ESP32 will go to sleep (in seconds) */
+#define TIME_TO_SLEEP 30//300 /**< Time ESP32 will go to sleep (in seconds) */
 // Select green or non green roof by commenting / uncommenting this
-//#define GREEN_ROOF true
+#define GREEN_ROOF true
 
 // Measurement time settings
 #define uS_TO_S_FACTOR 1000000                  /**< Conversion factor for micro seconds to seconds */
@@ -67,8 +68,13 @@
 // IOT Hub
 #define INCOMING_DATA_BUFFER_SIZE 256
 #define IOT_CONFIG_IOTHUB_FQDN "green-roof-prototype.azure-devices.net"
-#define IOT_CONFIG_DEVICE_ID "TestESP"
-#define IOT_CONFIG_DEVICE_KEY "4LBZcoSebA7xvzPg3vIpSnIieqU2lJBv5IeyenYgyX4="
+#ifdef GREEN_ROOF
+#define IOT_CONFIG_DEVICE_ID "ESP-Green-Roof"
+#define IOT_CONFIG_DEVICE_KEY "9rEsrXkzDrz6YvsTh9SKhekWhFC+1KbIHLOZZB2gI+o="
+#else
+#define IOT_CONFIG_DEVICE_ID "ESP-Normal-Roof"
+#define IOT_CONFIG_DEVICE_KEY "U9uLaYK2PDGLKuzG74k4v+hEKhcqDQtSm2dD/L46iIk="
+#endif
 #define sizeofarray(a) (sizeof(a) / sizeof(a[0]))
 #define AZURE_SDK_CLIENT_USER_AGENT "c%2F" AZ_SDK_VERSION_STRING "(ard;esp32)"
 #define SAS_TOKEN_DURATION_IN_MINUTES 60

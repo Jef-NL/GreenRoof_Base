@@ -5,6 +5,7 @@
 #define AZIOTSASTOKEN_H
 
 #include <Arduino.h>
+#include "Settings/config.h"
 #include <az_iot_hub_client.h>
 #include <az_span.h>
 
