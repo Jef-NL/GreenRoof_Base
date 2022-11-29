@@ -106,14 +106,14 @@ public:
      **/
     bool sendData();
 
-    #ifndef GREEN_ROOF
+#ifndef GREEN_ROOF
     /**
-     * @brief Get the Battery Percentage 
-     * 
+     * @brief Get the Battery Percentage
+     *
      * @return int16_t Last measured percentage
      */
     int16_t getBatteryPercentage();
-    #endif
+#endif
 
 private:
     /**
@@ -144,14 +144,14 @@ private:
 
     /**
      * @brief Remap value between output values (Linear)
-     * 
+     *
      * @param x Input value to be remapped
      * @param in_min Minimum input value equal to out_min
      * @param in_max Maximum input value equal to out_max
      * @param out_min Remapped min output
      * @param out_max Remapped max output
      * @return float Remapped value for input x
-    **/
+     **/
     float map(float x, float in_min, float in_max, float out_min, float out_max);
 
 #ifndef GREEN_ROOF

@@ -73,9 +73,9 @@ void DataPublisher::wirelessEvent(WiFiEvent_t event, WiFiEventInfo_t info)
         break;
     case SYSTEM_EVENT_STA_DISCONNECTED:
     case SYSTEM_EVENT_STA_LOST_IP:
-        NETWORK_WARN("Disconnected from WiFi network\n");
+        NETWORK_WARN("Disconnected form WiFi network...\n");
         DataPublisher::INSTANCE()->_connected = false;
-        DataPublisher::INSTANCE()->_disconnected = true;
+        // DataPublisher::INSTANCE()->_disconnected = true;
         break;
     case SYSTEM_EVENT_STA_STOP:
         NETWORK_LOG("Connection closed\n");
@@ -114,8 +114,19 @@ bool DataPublisher::sendData()
         return false;
 
     // Wait for connection while not disconnected
-    while (!this->wirelessGetConnected() && !this->_disconnected)
-        delayMicroseconds(10);
+    uint16_t timeout = 0;
+    while (!this->wirelessGetConnected() && timeout < 3000)
+    {
+        delay(1);
+        timeout++;
+    }
+
+    if (timeout >= 3000)
+    {
+        this->_disconnected = true;
+        this->_connected = false;
+        NETWORK_WARN("Timeout...\n");
+    }
 
     // Update timestamp for measurement
     _rawData->timestamp = this->updateTimestamp();
@@ -153,6 +164,7 @@ bool DataPublisher::sendData()
 
 time_t DataPublisher::updateTimestamp()
 {
+    // ToDo: Check why the timestamp is garbage the moment there is no network available.
     // Configure NTP
     configTime(0, 0, NTP_SERVER);
     setenv("TZ", TZ_INFO, 1);
@@ -169,12 +181,12 @@ time_t DataPublisher::updateTimestamp()
 void DataPublisher::showTime(tm localTime)
 {
     DEBUG_LOG("[TIME] %02d-%02d-%04d %02d:%02d:%02d\n",
-                  localTime.tm_mday,
-                  localTime.tm_mon + 1,
-                  localTime.tm_year + 1900,
-                  localTime.tm_hour,
-                  localTime.tm_min,
-                  localTime.tm_sec);
+              localTime.tm_mday,
+              localTime.tm_mon + 1,
+              localTime.tm_year + 1900,
+              localTime.tm_hour,
+              localTime.tm_min,
+              localTime.tm_sec);
 }
 
 float DataPublisher::map(float x, float in_min, float in_max, float out_min, float out_max)
@@ -186,9 +198,10 @@ float DataPublisher::map(float x, float in_min, float in_max, float out_min, flo
 }
 
 #ifndef GREEN_ROOF
+RTC_DATA_ATTR int8_t batteryLowCnt = 0;
 int16_t DataPublisher::readBattery()
 {
-    //float factor = 1.0f / ((float)BATTERY_R2 / ((float)BATTERY_R1 + (float)BATTERY_R2));
+    // float factor = 1.0f / ((float)BATTERY_R2 / ((float)BATTERY_R1 + (float)BATTERY_R2));
     float factor = 4.85f; // 4.6 is origin
     float batteryConstant = factor * ((float)ESP_VOLTAGE_MV / (float)ANALOG_MAX_VALUE);
 
@@ -204,16 +217,25 @@ int16_t DataPublisher::readBattery()
     float batteryVoltage = (float)analogRead * batteryConstant;
 
     int16_t batteryLevel = (int16_t)this->map(batteryVoltage, BATTERY_MIN_VOLT, BATTERY_MAX_VOLT, 0, 100);
-    
+
     DEBUG_LOG("[BATTERY] > Pro: %d V: %f \n", batteryLevel, batteryVoltage);
-    #ifdef BATTERY_SAFETY_ENABLE
+#ifdef BATTERY_SAFETY_ENABLE
     if (batteryLevel < MIN_BATTERY_LEVEL)
     {
-        DEBUG_WARN("[BATTERY ALERT] > Voltage to low Pro: %d V: %f \n Going to sleep.", batteryLevel, batteryVoltage);
-        esp_deep_sleep_start();
+        batteryLowCnt++;
+        DEBUG_WARN("[BATTERY ALERT] > Voltage to low Pro: %d V: %f \n Happened %d times.\n", batteryLevel, batteryVoltage, batteryLowCnt);
+        if (batteryLowCnt > 2)
+        {
+            DEBUG_WARN("[BATTERY ALERT] > Going to sleep.\n");
+            esp_deep_sleep_start();
+        }
     }
-    #endif
-    
+    else
+    {
+        batteryLowCnt = 0;
+    }
+#endif
+
     _batteryLevel = batteryLevel;
 
     return batteryLevel;

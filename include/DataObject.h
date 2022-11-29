@@ -40,14 +40,14 @@ struct DataEntry
 #ifdef GREEN_ROOF
 struct DataObject
 {
-    time_t timestamp; /**< Data timestamp */
+    time_t timestamp;               /**< Data timestamp */
     std::vector<DataEntry *> items; /**< List of data fields */
 };
 #else
 struct DataObject
 {
-    time_t timestamp; /**< Data timestamp */
-    int16_t batteryLevel; /**< Battery level in % */
+    time_t timestamp;               /**< Data timestamp */
+    int16_t batteryLevel;           /**< Battery level in % */
     std::vector<DataEntry *> items; /**< List of data fields */
 };
 #endif

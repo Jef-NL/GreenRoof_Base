@@ -44,8 +44,8 @@ public:
          * @param instance Sensor implementation instance
          **/
         Sensor(String name, SensorBase *instance) : sensorName(name), sensor(instance) {}
-        String sensorName; /**< Sensor registration name */
-        SensorBase *sensor;     /**< Sensor instance */
+        String sensorName;  /**< Sensor registration name */
+        SensorBase *sensor; /**< Sensor instance */
     };
 
 public:
@@ -62,10 +62,10 @@ public:
      * @brief Get the measurement results
      *
      * Blocking fully virtual function, to be over written.
-     * @return uint16_t Sensor value
+     * @return int16_t Sensor value
      **/
-    virtual uint16_t getMeasurementResult() = 0;
+    virtual int16_t getMeasurementResult() = 0;
 
 protected:
-    uint16_t _sensorValue = 0; /**< Sensor value for publishing */
+    int16_t _sensorValue = 0; /**< Sensor value for publishing */
 };

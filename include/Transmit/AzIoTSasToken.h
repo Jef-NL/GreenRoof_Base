@@ -13,7 +13,7 @@ class AzIoTSasToken
 {
 public:
   AzIoTSasToken(
-      az_iot_hub_client* client,
+      az_iot_hub_client *client,
       az_span deviceKey,
       az_span signatureBuffer,
       az_span sasTokenBuffer);
@@ -22,7 +22,7 @@ public:
   az_span Get();
 
 private:
-  az_iot_hub_client* client;
+  az_iot_hub_client *client;
   az_span deviceKey;
   az_span signatureBuffer;
   az_span sasTokenBuffer;

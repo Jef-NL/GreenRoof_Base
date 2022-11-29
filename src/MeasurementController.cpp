@@ -32,7 +32,8 @@ void MeasurementController::addSensors(std::vector<SensorBase::Sensor *> sensors
     }
 }
 
-bool MeasurementController::runProcess() {
+bool MeasurementController::runProcess()
+{
     // ToDo: Make threaded (Maybe, is interrupt based for networking) and add return status
     this->connect();
     this->runMeasurements();

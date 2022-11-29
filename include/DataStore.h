@@ -44,10 +44,10 @@ public:
 public:
 #pragma pack(push, 1)
 #ifdef GREEN_ROOF
-/**
- * @brief Pre defined storage object for this device.
- *
- **/
+    /**
+     * @brief Pre defined storage object for this device.
+     *
+     **/
     struct StorageBlock
     {
         int16_t temp1;      // 2 Bytes

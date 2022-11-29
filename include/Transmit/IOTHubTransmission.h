@@ -53,17 +53,17 @@ public:
 
     /**
      * @brief Close connection with endpoint
-     * 
-    **/
+     *
+     **/
     void close() override;
 
     /**
      * @brief MQTT event handler method
-     * 
+     *
      * @param event MQTT Event
      * @return esp_err_t Error on fault
-    **/
-    static esp_err_t mqtt_event_handler(esp_mqtt_event_handle_t event);
+     **/
+    static esp_err_t mqttEventHandler(esp_mqtt_event_handle_t event);
 
 private:
     /**

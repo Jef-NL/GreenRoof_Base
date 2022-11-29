@@ -46,11 +46,11 @@ public:
     /**
      * @brief Get the measurement results
      *
-     * @return uint16_t Moisture level in promille (1/1000th)
+     * @return int16_t Moisture level in Promille (1/1000th)
      **/
-    uint16_t getMeasurementResult() override;
+    int16_t getMeasurementResult() override;
 
 private:
-    const uint8_t _sensorPin; /**< Analog sensor pin */
+    const uint8_t _sensorPin;  /**< Analog sensor pin */
     const uint8_t _voltagePin; /**< Enable voltage on sensor */
 };
