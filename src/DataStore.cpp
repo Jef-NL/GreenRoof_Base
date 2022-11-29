@@ -35,21 +35,21 @@ void DataStore::storeDataObject(DataObject data)
     this->appendData(storeData);
 #ifdef GREEN_ROOF
     DEBUG_LOG("Wrote: %d, %d, %d, %d, %d, %d, %d, %llu\n",
-                  storeData.temp1,
-                  storeData.temp2,
-                  storeData.temp3,
-                  storeData.waterLvl,
-                  storeData.moist1,
-                  storeData.moist2,
-                  storeData.moist3,
-                  storeData.timestamp);
+              storeData.temp1,
+              storeData.temp2,
+              storeData.temp3,
+              storeData.waterLvl,
+              storeData.moist1,
+              storeData.moist2,
+              storeData.moist3,
+              storeData.timestamp);
 #else
     DEBUG_LOG("Wrote: %d, %d, %d, %d, %llu\n",
-                  storeData.temp1,
-                  storeData.temp2,
-                  storeData.temp3,
-                  storeData.waterLvl,
-                  storeData.timestamp);
+              storeData.temp1,
+              storeData.temp2,
+              storeData.temp3,
+              storeData.waterLvl,
+              storeData.timestamp);
 #endif
 }
 
@@ -169,23 +169,23 @@ void DataStore::loadDataStorage()
         {
 #ifdef GREEN_ROOF
             DEBUG_LOG("Read(%d): %d, %d, %d, %d, %d, %d, %d, %llu\n",
-                          i,
-                          data.temp1,
-                          data.temp2,
-                          data.temp3,
-                          data.waterLvl,
-                          data.moist1,
-                          data.moist2,
-                          data.moist3,
-                          data.timestamp);
+                      i,
+                      data.temp1,
+                      data.temp2,
+                      data.temp3,
+                      data.waterLvl,
+                      data.moist1,
+                      data.moist2,
+                      data.moist3,
+                      data.timestamp);
 #else
             DEBUG_LOG("Read(%d): %d, %d, %d, %d, %llu\n",
-                          i,
-                          data.temp1,
-                          data.temp2,
-                          data.temp3,
-                          data.waterLvl,
-                          data.timestamp);
+                      i,
+                      data.temp1,
+                      data.temp2,
+                      data.temp3,
+                      data.waterLvl,
+                      data.timestamp);
 #endif
 
             _retainedData.push_back(data);

@@ -68,7 +68,10 @@ bool IOTHubTransmission::transmitData(DataObject *object, bool skipSetup)
     char dataArray[length + 1];
 
     strncpy(dataArray, _parsedData.c_str(), length);
+    dataArray[length] = '\0';
     az_span data = AZ_SPAN_FROM_BUFFER(dataArray);
+
+    PUBLISH_LOG("Data(%d): %s\n", az_span_size(data), data);
 
     PUBLISH_LOG("Sending telemetry ...\n");
 
@@ -119,7 +122,7 @@ void IOTHubTransmission::close()
     {
         delay(10);
         timeout++;
-        if (timeout > (TIME_TO_SLEEP * 100))
+        if (timeout > (TIME_TO_SLEEP * 100) || connected == false)
         {
             PUBLISH_WARN("MQTT publish Never finished before new measurement\n");
             break;
@@ -129,7 +132,7 @@ void IOTHubTransmission::close()
     (void)esp_mqtt_client_destroy(mqttClient);
 }
 
-esp_err_t IOTHubTransmission::mqtt_event_handler(esp_mqtt_event_handle_t event)
+esp_err_t IOTHubTransmission::mqttEventHandler(esp_mqtt_event_handle_t event)
 {
     switch (event->event_id)
     {
@@ -201,12 +204,16 @@ String IOTHubTransmission::parseData()
     DynamicJsonDocument doc(JSON_POST_DOC_SIZE);
 
     // Add timestamp
-    doc[String(TIMESTAMP_NAME)] = this->_dataObject->timestamp;
+    doc[String(TIMESTAMP_NAME)] = (uint64_t)this->_dataObject->timestamp;
 #ifdef GREEN_ROOF
     doc["deviceId"] = "GREEN";
 #else
     doc["deviceId"] = "NORMAL";
     doc[String(BATTERY_LVL_NAME)] = this->_dataObject->batteryLevel;
+#endif
+
+#ifdef TESTDATA
+    doc["deviceId"] = "TEST";
 #endif
 
     // Add sensor data
@@ -278,7 +285,7 @@ int IOTHubTransmission::initMqttClient()
     mqtt_config.keepalive = 30;
     mqtt_config.disable_clean_session = 0;
     mqtt_config.disable_auto_reconnect = false;
-    mqtt_config.event_handle = mqtt_event_handler;
+    mqtt_config.event_handle = mqttEventHandler;
     mqtt_config.user_context = NULL;
     mqtt_config.cert_pem = (const char *)ca_pem;
 

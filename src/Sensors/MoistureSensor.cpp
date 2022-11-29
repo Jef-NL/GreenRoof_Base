@@ -35,11 +35,11 @@ bool MoistureSensor::startMeasurement()
         delay(ANALOG_SAMPLE_DELAY);
     }
 
-    _sensorValue = (uint16_t)((measurementSum / ANALOG_SAMPLE_COUNT) / (ANALOG_MAX_VALUE / 1000));
+    _sensorValue = (int16_t)((measurementSum / ANALOG_SAMPLE_COUNT) / (ANALOG_MAX_VALUE / 1000));
     return true;
 }
 
-uint16_t MoistureSensor::getMeasurementResult()
+int16_t MoistureSensor::getMeasurementResult()
 {
     return _sensorValue;
 }

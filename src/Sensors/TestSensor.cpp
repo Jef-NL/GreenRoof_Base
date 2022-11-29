@@ -24,7 +24,7 @@ bool TestSensor::startMeasurement()
     return true;
 }
 
-uint16_t TestSensor::getMeasurementResult()
+int16_t TestSensor::getMeasurementResult()
 {
-    return (uint16_t)this->_sensorValue;
+    return (int16_t)this->_sensorValue;
 }

@@ -40,9 +40,9 @@ public:
      *
      * @return uint16_t Sensor value
      **/
-    uint16_t getMeasurementResult() override;
+    int16_t getMeasurementResult() override;
 
 private:
-    uint16_t _localVal;  /**< Local test value */
+    int16_t _localVal;  /**< Local test value */
 };
 

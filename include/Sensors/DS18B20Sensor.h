@@ -55,9 +55,9 @@ public:
     /**
      * @brief Get the measurement results
      *
-     * @return uint16_t Temperature in degrees * TEMPERATURE_MULTIPLICATION
+     * @return int16_t Temperature in degrees * TEMPERATURE_MULTIPLICATION
      **/
-    uint16_t getMeasurementResult() override;
+    int16_t getMeasurementResult() override;
 
 private:
     OneWireTemperatureBus *_sharedBus; /**< Shared OneWire bus for communication */

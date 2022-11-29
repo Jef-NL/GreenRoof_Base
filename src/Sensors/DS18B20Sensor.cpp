@@ -40,11 +40,11 @@ bool DS18B20Sensor::startMeasurement()
         return false;
     }
 
-    _sensorValue = (uint16_t)roundf(measurement * TEMPERATURE_MULTIPLICATION);
+    _sensorValue = (int16_t)roundf(measurement * TEMPERATURE_MULTIPLICATION);
     return true;
 }
 
-uint16_t DS18B20Sensor::getMeasurementResult()
+int16_t DS18B20Sensor::getMeasurementResult()
 {
     return _sensorValue;
 }

@@ -53,15 +53,12 @@ void setup()
   controller = new MeasurementController();
 
   // Set transmission type
-  // DataPublisher::INSTANCE()->setTransmissionMode(new HTTPTransmission());
   DataPublisher::INSTANCE()->setTransmissionMode(new IOTHubTransmission());
 
   // Create Bus instance
   sharedBus = new OneWireTemperatureBus(ONE_WIRE_BUS);
 
   // Add sensors                              |  Sensor name    |     Sensor type           |
-  // controller->addSensor(new SensorBase::Sensor(SENS_TEMP1_NAME, new TestSensor(6)));
-  // controller->addSensor(new SensorBase::Sensor(SENS_TEMP2_NAME, new TestSensor(18)));
   controller->addSensor(new SensorBase::Sensor(SENS_WATER_NAME, new WaterLevelSensor(WATER_ECHO_PIN, WATER_TRIGGER_PIN)));
 #ifdef GREEN_ROOF
   controller->addSensor(new SensorBase::Sensor(SENS_TEMP1_NAME, new DS18B20Sensor(sharedBus, (uint64_t)2594073448133232936)));  //(uint64_t)4035225328881985576))); // Green - Non Green
@@ -79,9 +76,6 @@ void setup()
   // Run measurements
   controller->runProcess();
 
-  endTimestamp = millis();
-  unsigned long timePassed = endTimestamp - startTimestamp;
-
   // Set controller to sleep
   btStop();
   esp_bt_controller_disable();
@@ -89,15 +83,19 @@ void setup()
   WiFi.mode(WIFI_OFF);
   esp_wifi_stop();
 
-  DEBUG_LOG("Going to sleep for %lu milliseconds.\n", ((TIME_TO_SLEEP * 1000) - timePassed));
+  // Calculate sleep time
+  endTimestamp = millis();
+  unsigned long timePassed = endTimestamp - startTimestamp;
+  unsigned long timeToSLeep = ((TIME_TO_SLEEP * 1000) > timePassed) ? ((TIME_TO_SLEEP * 1000) - timePassed) : 0;
+  DEBUG_LOG("Going to sleep for %lu milliseconds.\n", timeToSLeep);
 #if PROTO_DEBUG_LVL != -1
   Serial.flush();
 #endif
 
-  esp_sleep_enable_timer_wakeup(((TIME_TO_SLEEP * 1000) - timePassed) * uS_TO_mS_FACTOR);
+  esp_sleep_enable_timer_wakeup(timeToSLeep * uS_TO_mS_FACTOR);
   esp_sleep_pd_config(ESP_PD_DOMAIN_MAX, ESP_PD_OPTION_OFF);
-  esp_sleep_pd_config(ESP_PD_DOMAIN_RTC_SLOW_MEM, ESP_PD_OPTION_OFF);
-  esp_sleep_pd_config(ESP_PD_DOMAIN_RTC_FAST_MEM, ESP_PD_OPTION_OFF);
+  esp_sleep_pd_config(ESP_PD_DOMAIN_RTC_SLOW_MEM, ESP_PD_OPTION_ON);
+  esp_sleep_pd_config(ESP_PD_DOMAIN_RTC_FAST_MEM, ESP_PD_OPTION_ON);
   esp_sleep_pd_config(ESP_PD_DOMAIN_RTC_PERIPH, ESP_PD_OPTION_OFF);
   esp_deep_sleep_start();
 }
