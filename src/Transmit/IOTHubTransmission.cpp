@@ -71,8 +71,6 @@ bool IOTHubTransmission::transmitData(DataObject *object, bool skipSetup)
     dataArray[length] = '\0';
     az_span data = AZ_SPAN_FROM_BUFFER(dataArray);
 
-    PUBLISH_LOG("Data(%d): %s\n", az_span_size(data), data);
-
     PUBLISH_LOG("Sending telemetry ...\n");
 
     // Gather MQTT topic
@@ -136,7 +134,7 @@ esp_err_t IOTHubTransmission::mqttEventHandler(esp_mqtt_event_handle_t event)
 {
     switch (event->event_id)
     {
-        int i, r;
+        int i;
 
     case MQTT_EVENT_ERROR:
         PUBLISH_WARN("MQTT event MQTT_EVENT_ERROR\n");
@@ -145,16 +143,6 @@ esp_err_t IOTHubTransmission::mqttEventHandler(esp_mqtt_event_handle_t event)
     case MQTT_EVENT_CONNECTED:
         PUBLISH_LOG("MQTT event MQTT_EVENT_CONNECTED\n");
         connected = true;
-        // r = esp_mqtt_client_subscribe(mqttClient, AZ_IOT_HUB_CLIENT_C2D_SUBSCRIBE_TOPIC, 1);
-        // if (r == -1)
-        // {
-        //     Serial.println("Could not subscribe for cloud-to-device messages.");
-        // }
-        // else
-        // {
-        //     Serial.println("Subscribed for cloud-to-device messages; message id:" + String(r));
-        // }
-
         break;
     case MQTT_EVENT_DISCONNECTED:
         PUBLISH_LOG("MQTT event MQTT_EVENT_DISCONNECTED\n");
