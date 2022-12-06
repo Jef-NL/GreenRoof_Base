@@ -16,7 +16,7 @@
 #define TIME_TO_SLEEP 300 /**< Time ESP32 will go to sleep (in seconds) */
 
 // Select green or non green roof by commenting / uncommenting this
-#define GREEN_ROOF true
+#define GREEN_ROOF
 
 // Uncomment to publish test data to the database (Device ID TEST)
 //#define TESTDATA
