@@ -17,6 +17,7 @@
 #include <HTTPClient.h>
 #include "Settings/config.h"
 #include "Transmit/HTTPTransmission.h"
+#include "Transmit/UDPTransmission.h"
 #include "Transmit/IOTHubTransmission.h"
 
 #include "MeasurementController.h"
@@ -54,6 +55,8 @@ void setup()
 
   // Set transmission type
   DataPublisher::INSTANCE()->setTransmissionMode(new IOTHubTransmission());
+  // Set optional secondary data destination. (Low priority destination)
+  DataPublisher::INSTANCE()->addSecondaryTransmissionMode(new UDPTransmission());
 
   // Create Bus instance
   sharedBus = new OneWireTemperatureBus(ONE_WIRE_BUS);

@@ -53,7 +53,7 @@ void DataStore::storeDataObject(DataObject data)
 #endif
 }
 
-void DataStore::transmitDataStorage(TransmissionBase *endpoint)
+void DataStore::transmitDataStorage(TransmissionBase *endpoint, TransmissionBase *secondaryEndpoint)
 {
     // Load data in memory
     this->loadDataStorage(); // ToDo: Split up into chunks to limit the time and prevent memory overflows
@@ -66,6 +66,21 @@ void DataStore::transmitDataStorage(TransmissionBase *endpoint)
         {
             DEBUG_WARN("Failed to send data from storage\n");
             return;
+        }
+    }
+
+    if (secondaryEndpoint != nullptr)
+    {
+        for (auto object : _retainedData)
+        {
+            DataObject transmissionData = {0};
+            this->reFormatData(transmissionData, object);
+            if (!secondaryEndpoint->transmitData(&transmissionData, true))
+            {
+                DEBUG_WARN("Failed to send data from storage to SecondaryEndpoint.\n Deleting after sucessfull send to primary.\n");
+                this->deleteDataStorage();
+                return;
+            }
         }
     }
 

@@ -12,7 +12,9 @@
 
 RTC_DATA_ATTR int32_t channel = -1;
 
-DataPublisher::DataPublisher() : _connected(false), _disconnected(false), _lastTimestamp(0L)
+DataPublisher::DataPublisher() : _connected(false), _disconnected(false),
+                                 _dataEndpointPrimary(nullptr), _dataEndpointSecondary(nullptr),
+                                 _lastTimestamp(0L)
 {
     _dataStorage = new DataStore();
 }
@@ -89,7 +91,13 @@ void DataPublisher::wirelessEvent(WiFiEvent_t event, WiFiEventInfo_t info)
 void DataPublisher::setTransmissionMode(TransmissionBase *instance)
 {
     if (instance != nullptr)
-        _dataEndpoint = instance;
+        _dataEndpointPrimary = instance;
+}
+
+void DataPublisher::addSecondaryTransmissionMode(TransmissionBase *instance)
+{
+    if (instance != nullptr)
+        _dataEndpointSecondary = instance;
 }
 
 void DataPublisher::setData(DataObject data)
@@ -110,7 +118,7 @@ void DataPublisher::addData(String fieldName, int fieldValue)
 
 bool DataPublisher::sendData()
 {
-    if (_rawData == nullptr || _dataEndpoint == nullptr)
+    if (_rawData == nullptr || _dataEndpointPrimary == nullptr)
         return false;
 
     // Wait for connection while not disconnected
@@ -143,22 +151,41 @@ bool DataPublisher::sendData()
     }
 
     // Send data away
-    if (!_dataEndpoint->transmitData(_rawData))
+    if (!_dataEndpointPrimary->transmitData(_rawData))
     {
         PUBLISH_WARN("Data failed to send...\n");
         _dataStorage->storeDataObject(*_rawData);
         return false;
     }
 
+    if (_dataEndpointSecondary != nullptr)
+    {
+        if (!_dataEndpointSecondary->transmitData(_rawData))
+        {
+            _dataEndpointSecondary = nullptr;
+            PUBLISH_WARN("FAILED_TO_SEND Secondary endpoint failed... Removed endpoint for iteration.\n");
+        }
+    }
+
     // Data has been send sucessfully before
     if (_dataStorage->dataAvailable())
     {
-        _dataStorage->transmitDataStorage(_dataEndpoint);
+        if (_dataEndpointSecondary == nullptr)
+        {
+            _dataStorage->transmitDataStorage(_dataEndpointPrimary);
+        }
+        else
+        {
+            _dataStorage->transmitDataStorage(_dataEndpointPrimary, _dataEndpointSecondary);
+        }
     }
 
     // Clear data after it has been sended
     delete _rawData;
-    _dataEndpoint->close();
+    _dataEndpointPrimary->close();
+    if (_dataEndpointSecondary != nullptr)
+        _dataEndpointSecondary->close();
+    
     return true;
 }
 

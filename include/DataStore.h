@@ -90,8 +90,9 @@ public:
      * @brief Send retained data from local storage
      *
      * @param endpoint Transmission method instance
+     * @param secondaryEndmpoint Secondary Transmission method instance
      **/
-    void transmitDataStorage(TransmissionBase *endpoint);
+    void transmitDataStorage(TransmissionBase *endpoint, TransmissionBase *secondaryEndpoint = nullptr);
 
 private:
     /**

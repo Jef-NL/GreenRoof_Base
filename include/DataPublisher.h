@@ -84,6 +84,17 @@ public:
     void setTransmissionMode(TransmissionBase *instance);
 
     /**
+     * @brief Add a secondary Transmission mode object
+     * 
+     * Low priority secondary destination. This destination will only be published to if successfull. 
+     * When the destination fails to accept the data it will not be resend. Only the primary will be used for this.
+     * Sending from local storage will be aborted on FAILED_TO_SEND
+     * 
+     * @param instance Transmission instance
+    **/
+    void addSecondaryTransmissionMode(TransmissionBase *instance);
+
+    /**
      * @brief Set the Data for transmission
      *
      * @param data Sensor measurement data
@@ -165,10 +176,11 @@ private:
     int16_t _batteryLevel; /**< Last measured battery level */
 #endif
 
-    bool _connected;                 /**< Connections status */
-    bool _disconnected;              /**< Disconnected during process */
-    DataObject *_rawData;            /**< Raw data in struct */
-    TransmissionBase *_dataEndpoint; /**< Transmission method instance */
-    time_t _lastTimestamp;           /**< Timestamp of last measurement */
-    DataStore *_dataStorage;         /**< Local data storage instance */
+    bool _connected;                          /**< Connections status */
+    bool _disconnected;                       /**< Disconnected during process */
+    DataObject *_rawData;                     /**< Raw data in struct */
+    TransmissionBase *_dataEndpointPrimary;   /**< Transmission method instance */
+    TransmissionBase *_dataEndpointSecondary; /**< Transmission method secondary instance */
+    time_t _lastTimestamp;                    /**< Timestamp of last measurement */
+    DataStore *_dataStorage;                  /**< Local data storage instance */
 };

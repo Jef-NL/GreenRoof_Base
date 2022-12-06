@@ -13,13 +13,13 @@
 #include "Debug.h"
 
 // Sleep time
-#define TIME_TO_SLEEP 300 /**< Time ESP32 will go to sleep (in seconds) */
+#define TIME_TO_SLEEP 30 /**< Time ESP32 will go to sleep (in seconds) */
 
 // Select green or non green roof by commenting / uncommenting this
 #define GREEN_ROOF
 
 // Uncomment to publish test data to the database (Device ID TEST)
-//#define TESTDATA
+#define TESTDATA
 
 // Measurement time settings
 #define uS_TO_S_FACTOR 1000000        /**< Conversion factor for micro seconds to seconds */
@@ -97,6 +97,16 @@
 #define WEBSERVER_URL "http://192.168.0.175/SensorPub.php" /**< Webserver URL base for data transport to database */
 #define POST_CONTEXT_TYPE "application/json"               /**< Data contect type for POST */
 #define JSON_POST_DOC_SIZE 1024                            /**< Size of DynamicJsonDocument */
+
+// Urban Data Platform
+#ifdef GREEN_ROOF
+#define UDP_URL "http://20.16.84.167:1026/v2/entities/green_roof/attrs" /**< UDP Update URL*/
+#else
+#define UDP_URL "http://20.16.84.167:1026/v2/entities/normal_roof/attrs" /**< UDP Update URL*/
+#endif
+#define UDP_POST_CONTEXT_TYPE "application/json"              /**< Data contect type for POST */
+#define UDP_FIWARE_SERVICE "demoiot"                          /**< Fiware service name */
+#define UDP_FIWARE_SERVICEPATH "/green_roof_proto"            /**< Fiware sercive path */
 
 // Data Storage
 #define STORAGE_FILE "/local_data.bin" /**< Local storage file name */
