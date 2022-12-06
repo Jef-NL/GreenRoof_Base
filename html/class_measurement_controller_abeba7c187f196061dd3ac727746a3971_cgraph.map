@@ -1,0 +1,24 @@
+<map id="MeasurementController::runProcess" name="MeasurementController::runProcess">
+<area shape="rect" id="node1" title="Run threaded process for measurements." alt="" coords="5,94,161,135"/>
+<area shape="rect" id="node2" href="$class_measurement_controller.html#a1ffafc43dd499e1f52f0b72d712eb548" title="Setup Data publisher connection." alt="" coords="210,14,366,55"/>
+<area shape="rect" id="node6" href="$class_measurement_controller.html#a41a466efd3028ea2dcc7948530106ca4" title="Publish measurements to the DataPublisher." alt="" coords="209,94,367,135"/>
+<area shape="rect" id="node22" href="$class_measurement_controller.html#a14e9ca06a5759944210656cf4576b633" title="Run measurements for all sensors." alt="" coords="210,159,366,201"/>
+<area shape="rect" id="node3" href="$class_data_publisher.html#a4740f93775ead74b0bd4341dadac8b73" title="Connect to the wireless network." alt="" coords="415,13,621,40"/>
+<area shape="rect" id="node4" href="$class_data_publisher.html#a27a0a8162505d891b324e4d5bfa057dc" title="Wireless event callback method." alt="" coords="681,5,872,32"/>
+<area shape="rect" id="node5" href="$class_data_publisher.html#a10b8b56b6889df477dfe9b1ee549988d" title="Singleton class instance." alt="" coords="1191,183,1365,209"/>
+<area shape="rect" id="node7" href="$class_data_publisher.html#a1e695b3453c48f2887fc9c4fa3699066" title="Add datafield to data object." alt="" coords="439,101,597,128"/>
+<area shape="rect" id="node8" href="$class_data_publisher.html#a266411f687c44a946cbac8323903a3e5" title="Send data to network." alt="" coords="435,183,601,209"/>
+<area shape="rect" id="node9" href="$class_transmission_base.html#a8bda22d8af26bdab83608d288827f15c" title="Default close method, can be overwritten." alt="" coords="693,56,861,83"/>
+<area shape="rect" id="node10" href="$class_data_store.html#ad2397fa823658daa46dadd0e510f5af2" title="Check if data has been stored locally." alt="" coords="695,107,859,133"/>
+<area shape="rect" id="node11" href="$class_data_store.html#a9f153c8de4863259737ba4b75869bf67" title="Add data object to local storage." alt="" coords="685,157,868,184"/>
+<area shape="rect" id="node14" href="$class_transmission_base.html#a5f5167fe4e51db44b9070ca4c27e1961" title="Transmit data using method." alt="" coords="932,208,1143,235"/>
+<area shape="rect" id="node15" href="$class_data_store.html#a07027b1feb1d9819d77a48322f9cd2a7" title="Send retained data from local storage." alt="" coords="673,259,880,285"/>
+<area shape="rect" id="node19" href="$class_data_publisher.html#a36d4a0232251a0bf710d96be39f913af" title="Update the current Timestamp for a measurement." alt="" coords="669,309,884,336"/>
+<area shape="rect" id="node21" href="$class_data_publisher.html#af6aeeea1fe0922eec7187094470c2ede" title="Get connection status." alt="" coords="687,361,866,402"/>
+<area shape="rect" id="node12" href="$class_data_store.html#a1b9b92814aaedb80943d875a464ea7d9" title="Add data to local storage file." alt="" coords="959,107,1116,133"/>
+<area shape="rect" id="node13" href="$class_data_store.html#aeb526ffea5feb11fb3821aa5f6400c18" title="Format data from raw data into storage data." alt="" coords="962,157,1113,184"/>
+<area shape="rect" id="node16" href="$class_data_store.html#a10b2120afd567750d6117a266eb9207a" title="Delete locally stored data." alt="" coords="940,259,1135,285"/>
+<area shape="rect" id="node17" href="$class_data_store.html#a6724e2f03e4339881f7ee09b092a526c" title="Load data stored in file into the local _retainedData vector." alt="" coords="945,309,1129,336"/>
+<area shape="rect" id="node18" href="$class_data_store.html#a4ac88a34f9a5f6ebc435bd1bf652e1c7" title="Format data from storage data back to raw data." alt="" coords="954,360,1121,387"/>
+<area shape="rect" id="node20" href="$class_data_publisher.html#a01a7b2d8788d7d8b7100a92c322a15a9" title="Helper print function." alt="" coords="953,411,1122,437"/>
+</map>

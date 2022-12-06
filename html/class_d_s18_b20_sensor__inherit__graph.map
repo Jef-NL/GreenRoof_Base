@@ -1,0 +1,4 @@
+<map id="DS18B20Sensor" name="DS18B20Sensor">
+<area shape="rect" id="node1" title="One wire temperature sensor implementation." alt="" coords="5,175,181,325"/>
+<area shape="rect" id="node2" href="$class_sensor_base.html" title="Sensor base class." alt="" coords="5,5,181,127"/>
+</map>

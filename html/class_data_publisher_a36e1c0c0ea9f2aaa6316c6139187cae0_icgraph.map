@@ -1,0 +1,4 @@
+<map id="DataPublisher::parseData" name="DataPublisher::parseData">
+<area shape="rect" id="node1" title="Format raw data to single sendable string." alt="" coords="252,5,423,32"/>
+<area shape="rect" id="node2" href="$class_data_publisher.html#a1940ff0729c2d4ffdf46c34c76616b58" title="Send HTTP post to server with sensor data." alt="" coords="5,5,204,32"/>
+</map>

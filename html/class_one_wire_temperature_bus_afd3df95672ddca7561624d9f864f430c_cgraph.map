@@ -1,0 +1,5 @@
+<map id="OneWireTemperatureBus::getTemperatureForAddress" name="OneWireTemperatureBus::getTemperatureForAddress">
+<area shape="rect" id="node1" title="Get the Temperature for the sensor with Address." alt="" coords="5,39,192,80"/>
+<area shape="rect" id="node2" href="$class_one_wire_temperature_bus.html#a32d7aba5fc362df498212ea6f4c55f5c" title="Address translation helper function." alt="" coords="240,5,408,47"/>
+<area shape="rect" id="node3" href="$class_one_wire_temperature_bus.html#a506ed0e8a2de83c44588eabae9aae89c" title="Run and buffer measurements for all connected sensors." alt="" coords="240,71,408,112"/>
+</map>

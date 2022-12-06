@@ -1,0 +1,4 @@
+<map id="OneWireTemperatureBus::getTemperatureForIndex" name="OneWireTemperatureBus::getTemperatureForIndex">
+<area shape="rect" id="node1" title="Get the Temperature For Index object." alt="" coords="5,5,176,47"/>
+<area shape="rect" id="node2" href="$class_one_wire_temperature_bus.html#a506ed0e8a2de83c44588eabae9aae89c" title="Run and buffer measurements for all connected sensors." alt="" coords="224,5,392,47"/>
+</map>

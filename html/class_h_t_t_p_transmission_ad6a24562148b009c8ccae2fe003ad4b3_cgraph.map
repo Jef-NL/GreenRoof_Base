@@ -1,0 +1,4 @@
+<map id="HTTPTransmission::transmitData" name="HTTPTransmission::transmitData">
+<area shape="rect" id="node1" title="Transmit data using HTTP Post method." alt="" coords="5,5,219,32"/>
+<area shape="rect" id="node2" href="$class_h_t_t_p_transmission.html#ab76cba884cb3c0d4e0088c6005256bb1" title="Prase raw data into Json." alt="" coords="267,5,465,32"/>
+</map>

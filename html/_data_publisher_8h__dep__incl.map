@@ -1,0 +1,8 @@
+<map id="D:/OneDrive &#45; Avans Hogeschool/Minor/PRO Smart Roofs/Software/GreenRoof_Base/include/DataPublisher.h" name="D:/OneDrive &#45; Avans Hogeschool/Minor/PRO Smart Roofs/Software/GreenRoof_Base/include/DataPublisher.h">
+<area shape="rect" id="node1" title="Data parser and management for transmission and storage of sensor data." alt="" coords="379,5,549,91"/>
+<area shape="rect" id="node2" href="$_measurement_controller_8h.html" title="Main measurement and communication controller." alt="" coords="141,139,312,224"/>
+<area shape="rect" id="node5" href="$_data_publisher_8cpp.html" title="Data parser and management for transmission and storage of sensor data." alt="" coords="336,146,592,217"/>
+<area shape="rect" id="node6" href="$_data_store_8cpp.html" title="Local data storage object." alt="" coords="617,146,850,217"/>
+<area shape="rect" id="node3" href="$main_8cpp.html" title="Main runnable." alt="" coords="5,279,208,350"/>
+<area shape="rect" id="node4" href="$_measurement_controller_8cpp.html" title="Main measurement and communication controller." alt="" coords="232,272,461,357"/>
+</map>

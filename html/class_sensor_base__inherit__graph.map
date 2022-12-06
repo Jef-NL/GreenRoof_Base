@@ -1,0 +1,7 @@
+<map id="SensorBase" name="SensorBase">
+<area shape="rect" id="node1" title="Sensor base class." alt="" coords="305,5,481,127"/>
+<area shape="rect" id="node2" href="$class_d_s18_b20_sensor.html" title="One wire temperature sensor implementation." alt="" coords="5,189,181,340"/>
+<area shape="rect" id="node3" href="$class_moisture_sensor.html" title="Analog moisture sensor implementation." alt="" coords="205,197,381,333"/>
+<area shape="rect" id="node4" href="$class_test_sensor.html" title=" " alt="" coords="405,204,581,325"/>
+<area shape="rect" id="node5" href="$class_water_level_sensor.html" title="Ultrasonic distance sensor class for calculating water level." alt="" coords="605,175,781,355"/>
+</map>

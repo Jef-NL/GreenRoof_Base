@@ -1,0 +1,5 @@
+<map id="HTTPTransmission" name="HTTPTransmission">
+<area shape="rect" id="node1" title="HTTP Post transmission." alt="" coords="5,345,164,467"/>
+<area shape="rect" id="node2" href="$class_transmission_base.html" title="Base class for sending data to one of the endpoints." alt="" coords="6,160,163,296"/>
+<area shape="rect" id="node3" href="$struct_data_object.html" title="Data object." alt="" coords="37,5,132,97"/>
+</map>

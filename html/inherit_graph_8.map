@@ -1,0 +1,7 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$class_sensor_base.html" title="Sensor base class." alt="" coords="5,81,99,108"/>
+<area shape="rect" id="node2" href="$class_d_s18_b20_sensor.html" title="One wire temperature sensor implementation." alt="" coords="151,5,269,32"/>
+<area shape="rect" id="node3" href="$class_moisture_sensor.html" title="Analog moisture sensor implementation." alt="" coords="153,56,267,83"/>
+<area shape="rect" id="node4" href="$class_test_sensor.html" title=" " alt="" coords="166,107,254,133"/>
+<area shape="rect" id="node5" href="$class_water_level_sensor.html" title="Ultrasonic distance sensor class for calculating water level." alt="" coords="147,157,273,184"/>
+</map>

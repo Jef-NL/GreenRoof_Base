@@ -1,0 +1,7 @@
+<map id="MeasurementController" name="MeasurementController">
+<area shape="rect" id="node1" title="Controller to execute the sensor measurements and publish the data to the DataPublisher." alt="" coords="105,865,289,1045"/>
+<area shape="rect" id="node2" href="$class_data_publisher.html" title="Wireless data parser and publisher." alt="" coords="79,461,314,803"/>
+<area shape="rect" id="node3" href="$class_transmission_base.html" title="Base class for sending data to one of the endpoints." alt="" coords="118,204,275,340"/>
+<area shape="rect" id="node4" href="$struct_data_object.html" title="Data object." alt="" coords="5,5,100,97"/>
+<area shape="rect" id="node5" href="$class_data_store.html" title="Local data storage class." alt="" coords="300,160,461,384"/>
+</map>

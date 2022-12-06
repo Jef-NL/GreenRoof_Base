@@ -1,0 +1,4 @@
+<map id="IOTHubTransmission::initIotHubClient" name="IOTHubTransmission::initIotHubClient">
+<area shape="rect" id="node1" title="Initialise IOT Hub client instance." alt="" coords="196,5,339,47"/>
+<area shape="rect" id="node2" href="$class_i_o_t_hub_transmission.html#a7dc5ceec6053a668812fa839b9e60fe4" title="Transmit data using HTTP Post method." alt="" coords="5,5,148,47"/>
+</map>

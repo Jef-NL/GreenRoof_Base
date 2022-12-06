@@ -1,0 +1,4 @@
+<map id="TransmissionBase" name="TransmissionBase">
+<area shape="rect" id="node1" title="Base class for sending data to one of the endpoints." alt="" coords="5,160,163,296"/>
+<area shape="rect" id="node2" href="$struct_data_object.html" title="Data object." alt="" coords="37,5,131,97"/>
+</map>

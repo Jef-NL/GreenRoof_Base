@@ -1,0 +1,4 @@
+<map id="OneWireTemperatureBus::addressArrayToUint64" name="OneWireTemperatureBus::addressArrayToUint64">
+<area shape="rect" id="node1" title="Address translation helper function." alt="" coords="229,5,397,47"/>
+<area shape="rect" id="node2" href="$class_one_wire_temperature_bus.html#a9423e8101e2316148335f7fd04788f21" title="Construct a new One Wire Temperature Bus object." alt="" coords="5,5,181,47"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="MeasurementController::addSensor" name="MeasurementController::addSensor">
+<area shape="rect" id="node1" title="Add one sensor to the controller." alt="" coords="209,35,365,76"/>
+<area shape="rect" id="node2" href="$class_measurement_controller.html#a02a918b97cff1174c87af1962d7dac7e" title="Add multiple sensors to the controller." alt="" coords="5,5,161,47"/>
+<area shape="rect" id="node3" href="$main_8cpp.html#a4fc01d736fe50cf5b977f755b675f11d" title="Single run function on startup." alt="" coords="56,71,111,98"/>
+</map>

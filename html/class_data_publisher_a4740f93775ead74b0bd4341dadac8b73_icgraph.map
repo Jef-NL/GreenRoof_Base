@@ -1,0 +1,6 @@
+<map id="DataPublisher::wirelessConnect" name="DataPublisher::wirelessConnect">
+<area shape="rect" id="node1" title="Connect to the wireless network." alt="" coords="516,13,723,39"/>
+<area shape="rect" id="node2" href="$class_measurement_controller.html#a1ffafc43dd499e1f52f0b72d712eb548" title="Setup Data publisher connection." alt="" coords="312,5,468,47"/>
+<area shape="rect" id="node3" href="$class_measurement_controller.html#abeba7c187f196061dd3ac727746a3971" title="Run threaded process for measurements." alt="" coords="108,5,264,47"/>
+<area shape="rect" id="node4" href="$main_8cpp.html#a4fc01d736fe50cf5b977f755b675f11d" title="Single run function on startup." alt="" coords="5,13,60,39"/>
+</map>

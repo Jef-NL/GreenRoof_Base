@@ -1,0 +1,5 @@
+<map id="IOTHubTransmission" name="IOTHubTransmission">
+<area shape="rect" id="node1" title=" " alt="" coords="5,345,176,525"/>
+<area shape="rect" id="node2" href="$class_transmission_base.html" title="Base class for sending data to one of the endpoints." alt="" coords="12,160,169,296"/>
+<area shape="rect" id="node3" href="$struct_data_object.html" title="Data object." alt="" coords="43,5,138,97"/>
+</map>

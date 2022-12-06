@@ -1,0 +1,5 @@
+<map id="DataPublisher::wirelessConnect" name="DataPublisher::wirelessConnect">
+<area shape="rect" id="node1" title="Connect to the wireless network." alt="" coords="5,5,212,32"/>
+<area shape="rect" id="node2" href="$class_data_publisher.html#a27a0a8162505d891b324e4d5bfa057dc" title="Wireless event callback method." alt="" coords="260,5,451,32"/>
+<area shape="rect" id="node3" href="$class_data_publisher.html#a10b8b56b6889df477dfe9b1ee549988d" title="Singleton class instance." alt="" coords="499,5,673,32"/>
+</map>

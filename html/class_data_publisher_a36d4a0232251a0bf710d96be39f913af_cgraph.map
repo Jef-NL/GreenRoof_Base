@@ -1,0 +1,4 @@
+<map id="DataPublisher::updateTimestamp" name="DataPublisher::updateTimestamp">
+<area shape="rect" id="node1" title="Update the current Timestamp for a measurement." alt="" coords="5,5,220,32"/>
+<area shape="rect" id="node2" href="$class_data_publisher.html#a01a7b2d8788d7d8b7100a92c322a15a9" title="Helper print function." alt="" coords="268,5,437,32"/>
+</map>

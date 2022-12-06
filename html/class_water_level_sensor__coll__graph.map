@@ -1,0 +1,4 @@
+<map id="WaterLevelSensor" name="WaterLevelSensor">
+<area shape="rect" id="node1" title="Ultrasonic distance sensor class for calculating water level." alt="" coords="5,175,181,355"/>
+<area shape="rect" id="node2" href="$class_sensor_base.html" title="Sensor base class." alt="" coords="5,5,181,127"/>
+</map>

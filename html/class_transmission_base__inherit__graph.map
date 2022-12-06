@@ -1,0 +1,6 @@
+<map id="TransmissionBase" name="TransmissionBase">
+<area shape="rect" id="node1" title="Base class for sending data to one of the endpoints." alt="" coords="195,5,353,156"/>
+<area shape="rect" id="node2" href="$class_h_t_t_p_transmission.html" title="HTTP Post transmission." alt="" coords="5,233,164,355"/>
+<area shape="rect" id="node3" href="$class_i_o_t_hub_transmission.html" title=" " alt="" coords="189,204,359,384"/>
+<area shape="rect" id="node4" href="$class_u_d_p_transmission.html" title="UDP / HTTP post transmission." alt="" coords="383,233,538,355"/>
+</map>

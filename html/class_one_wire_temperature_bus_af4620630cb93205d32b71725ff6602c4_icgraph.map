@@ -1,0 +1,4 @@
+<map id="OneWireTemperatureBus::getTemperatureForAddress" name="OneWireTemperatureBus::getTemperatureForAddress">
+<area shape="rect" id="node1" title="Get the Temperature for the sensor with Address." alt="" coords="284,5,471,47"/>
+<area shape="rect" id="node2" href="$class_d_s18_b20_sensor.html#acd9a94f7c2aefa944884e4b12c5075df" title="Run sensor measurement steps." alt="" coords="5,13,236,39"/>
+</map>

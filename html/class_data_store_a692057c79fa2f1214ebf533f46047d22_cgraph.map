@@ -1,0 +1,8 @@
+<map id="DataStore::transmitDataStorage" name="DataStore::transmitDataStorage">
+<area shape="rect" id="node1" title="Send retained data from local storage." alt="" coords="5,81,212,108"/>
+<area shape="rect" id="node2" href="$class_data_store.html#a10b2120afd567750d6117a266eb9207a" title="Delete locally stored data." alt="" coords="268,5,463,32"/>
+<area shape="rect" id="node3" href="$class_data_store.html#a6724e2f03e4339881f7ee09b092a526c" title="Load data stored in file into the local _retainedData vector." alt="" coords="273,56,457,83"/>
+<area shape="rect" id="node4" href="$class_data_store.html#a4ac88a34f9a5f6ebc435bd1bf652e1c7" title="Format data from storage data back to raw data." alt="" coords="282,107,449,133"/>
+<area shape="rect" id="node6" href="$class_transmission_base.html#a5f5167fe4e51db44b9070ca4c27e1961" title="Transmit data using method." alt="" coords="260,157,471,184"/>
+<area shape="rect" id="node5" href="$class_data_publisher.html#a10b8b56b6889df477dfe9b1ee549988d" title="Singleton class instance." alt="" coords="519,107,693,133"/>
+</map>

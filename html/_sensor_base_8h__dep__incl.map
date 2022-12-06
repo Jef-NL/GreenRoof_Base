@@ -1,0 +1,14 @@
+<map id="D:/OneDrive &#45; Avans Hogeschool/Minor/PRO Smart Roofs/Software/GreenRoof_Base/include/Sensors/SensorBase.h" name="D:/OneDrive &#45; Avans Hogeschool/Minor/PRO Smart Roofs/Software/GreenRoof_Base/include/Sensors/SensorBase.h">
+<area shape="rect" id="node1" title="Sensor base object Interface." alt="" coords="529,5,699,91"/>
+<area shape="rect" id="node2" href="$_measurement_controller_8h.html" title="Main measurement and communication controller." alt="" coords="1003,139,1174,224"/>
+<area shape="rect" id="node3" href="$main_8cpp.html" title="Main runnable." alt="" coords="451,279,654,350"/>
+<area shape="rect" id="node5" href="$_d_s18_b20_sensor_8h.html" title=" " alt="" coords="125,139,311,224"/>
+<area shape="rect" id="node7" href="$_moisture_sensor_8h.html" title="Moisture sensor class." alt="" coords="335,139,515,224"/>
+<area shape="rect" id="node9" href="$_test_sensor_8h.html" title="Test sensor class." alt="" coords="591,139,760,224"/>
+<area shape="rect" id="node11" href="$_water_level_sensor_8h.html" title="Water level sensor class." alt="" coords="785,139,979,224"/>
+<area shape="rect" id="node4" href="$_measurement_controller_8cpp.html" title="Main measurement and communication controller." alt="" coords="1125,272,1354,357"/>
+<area shape="rect" id="node6" href="$_d_s18_b20_sensor_8cpp.html" title="Temperature sensor class." alt="" coords="5,272,204,357"/>
+<area shape="rect" id="node8" href="$_moisture_sensor_8cpp.html" title="Moisture sensor class." alt="" coords="228,272,427,357"/>
+<area shape="rect" id="node10" href="$_test_sensor_8cpp.html" title="Test sensor class." alt="" coords="679,272,877,357"/>
+<area shape="rect" id="node12" href="$_water_level_sensor_8cpp.html" title="Water level sensor class." alt="" coords="901,272,1100,357"/>
+</map>

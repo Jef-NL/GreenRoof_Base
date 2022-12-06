@@ -1,0 +1,5 @@
+<map id="DataStore::storeDataObject" name="DataStore::storeDataObject">
+<area shape="rect" id="node1" title="Add data object to local storage." alt="" coords="5,31,188,57"/>
+<area shape="rect" id="node2" href="$class_data_store.html#a1b9b92814aaedb80943d875a464ea7d9" title="Add data to local storage file." alt="" coords="236,5,393,32"/>
+<area shape="rect" id="node3" href="$class_data_store.html#aeb526ffea5feb11fb3821aa5f6400c18" title="Format data from raw data into storage data." alt="" coords="239,56,390,83"/>
+</map>

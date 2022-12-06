@@ -1,0 +1,4 @@
+<map id="WaterLevelSensor::startMeasurement" name="WaterLevelSensor::startMeasurement">
+<area shape="rect" id="node1" title="Run sensor measurement steps." alt="" coords="5,13,245,39"/>
+<area shape="rect" id="node2" href="$class_water_level_sensor.html#ac911586c4e9863c769771564be6a12f2" title="Calculate water level for defined bucket size." alt="" coords="293,5,480,47"/>
+</map>

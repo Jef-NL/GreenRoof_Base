@@ -1,0 +1,6 @@
+<map id="DS18B20Sensor::startMeasurement" name="DS18B20Sensor::startMeasurement">
+<area shape="rect" id="node1" title="Run sensor measurement steps." alt="" coords="5,46,236,73"/>
+<area shape="rect" id="node2" href="$class_one_wire_temperature_bus.html#af4620630cb93205d32b71725ff6602c4" title="Get the Temperature for the sensor with Address." alt="" coords="284,5,471,47"/>
+<area shape="rect" id="node4" href="$class_one_wire_temperature_bus.html#aeefa7d0dcbd14a3907b5f4a0396687fb" title="Get the Temperature For Index object." alt="" coords="292,71,463,112"/>
+<area shape="rect" id="node3" href="$class_one_wire_temperature_bus.html#a506ed0e8a2de83c44588eabae9aae89c" title="Run and buffer measurements for all connected sensors." alt="" coords="519,39,687,80"/>
+</map>
