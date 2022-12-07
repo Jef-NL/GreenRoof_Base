@@ -66,7 +66,7 @@ String UDPTransmission::parseData()
     entity["type"] = "Integer";
     entity["value"] = this->_dataObject->batteryLevel;
 #endif
-    
+
     // Add sensor data
     for (auto entry : this->_dataObject->items)
     {
@@ -74,6 +74,10 @@ String UDPTransmission::parseData()
         JsonObject entity = doc.createNestedObject(entry->fieldName.c_str());
         entity["type"] = "Integer";
         entity["value"] = entry->fieldValue;
+
+        JsonObject timestamp = entity["metadata"].createNestedObject("TimeInstant");
+        timestamp["type"] = "DateTime";
+        timestamp["value"] = this->parseTime(this->_dataObject->timestamp);
     }
 
     // Json to string
@@ -83,4 +87,20 @@ String UDPTransmission::parseData()
     PUBLISH_LOG("%s\n", _parsedData.c_str());
 
     return String(_parsedData);
+}
+
+String UDPTransmission::parseTime(const time_t unixTimestamp)
+{
+    tm *time = gmtime(&unixTimestamp);
+    char timestamp[25];
+
+    sprintf(timestamp, "%04d-%02d-%02dT%02d:%02d:%02dZ",
+              time->tm_year + 1900,
+              time->tm_mon + 1,
+              time->tm_mday,
+              time->tm_hour,
+              time->tm_min,
+              time->tm_sec);
+    
+    return String(timestamp);
 }

@@ -13,13 +13,13 @@
 #include "Debug.h"
 
 // Sleep time
-#define TIME_TO_SLEEP 30 /**< Time ESP32 will go to sleep (in seconds) */
+#define TIME_TO_SLEEP 300 /**< Time ESP32 will go to sleep (in seconds) */
 
 // Select green or non green roof by commenting / uncommenting this
-#define GREEN_ROOF
+//#define GREEN_ROOF
 
 // Uncomment to publish test data to the database (Device ID TEST)
-#define TESTDATA
+//#define TESTDATA
 
 // Measurement time settings
 #define uS_TO_S_FACTOR 1000000        /**< Conversion factor for micro seconds to seconds */

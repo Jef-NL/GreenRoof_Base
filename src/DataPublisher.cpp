@@ -191,7 +191,6 @@ bool DataPublisher::sendData()
 
 time_t DataPublisher::updateTimestamp()
 {
-    // ToDo: Check why the timestamp is garbage the moment there is no network available.
     // Configure NTP
     configTime(0, 0, NTP_SERVER);
     setenv("TZ", TZ_INFO, 1);

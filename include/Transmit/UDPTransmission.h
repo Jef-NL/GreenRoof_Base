@@ -52,6 +52,14 @@ private:
      */
     String parseData() override;
 
+    /**
+     * @brief Parse time to required ISO8601 format
+     * 
+     * @param unixTimestamp Timestamp in Unix format
+     * @return String Timestamp string
+    **/
+    String parseTime(time_t unixTimestamp);
+
     HTTPClient _httpClient; /**< HTTP client instance */
 };
 
