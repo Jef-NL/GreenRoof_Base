@@ -71,7 +71,7 @@ var sectionId = 'dynsection-0';
 <!-- Node2 -->
 <g id="node2" class="node">
 <title>Node2</title>
-<g id="a_node2"><a xlink:href="_az_io_t_sas_token_8h.html" target="_top" xlink:title=" ">
+<g id="a_node2"><a xlink:href="_az_io_t_sas_token_8h.html" target="_top" xlink:title="Sas token class.">
 <polygon fill="white" stroke="black" points="54.99,-168.5 54.99,-187.5 188.99,-187.5 188.99,-168.5 54.99,-168.5"/>
 <text text-anchor="middle" x="121.99" y="-175.5" font-family="Helvetica,sans-Serif" font-size="10.00">Transmit/AzIoTSasToken.h</text>
 </a>

@@ -9,7 +9,7 @@
 <area shape="rect" id="node14" href="$_i_o_t_hub_transmission_8h.html" title="IOT Hub based transmission method." alt="" coords="1131,539,1341,624"/>
 <area shape="rect" id="node18" href="$_one_wire_temperature_bus_8h.html" title="Class for shared bus instance of temperature bus." alt="" coords="1729,672,1996,757"/>
 <area shape="rect" id="node22" href="$_sensor_base_8h.html" title="Sensor base object Interface." alt="" coords="1406,672,1575,757"/>
-<area shape="rect" id="node29" href="$_az_io_t_sas_token_8h.html" title=" " alt="" coords="1190,272,1373,357"/>
+<area shape="rect" id="node29" href="$_az_io_t_sas_token_8h.html" title="Sas token class." alt="" coords="1190,272,1373,357"/>
 <area shape="rect" id="node5" href="$_measurement_controller_8h.html" title="Main measurement and communication controller." alt="" coords="285,805,456,891"/>
 <area shape="rect" id="node8" href="$_data_publisher_8cpp.html" title="Data parser and management for transmission and storage of sensor data." alt="" coords="5,813,261,883"/>
 <area shape="rect" id="node9" href="$_data_store_8cpp.html" title="Local data storage object." alt="" coords="481,813,714,883"/>

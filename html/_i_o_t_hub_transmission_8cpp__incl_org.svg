@@ -190,7 +190,7 @@
 <!-- Node17 -->
 <g id="node17" class="node">
 <title>Node17</title>
-<g id="a_node17"><a xlink:href="_az_io_t_sas_token_8h.html" target="_top" xlink:title=" ">
+<g id="a_node17"><a xlink:href="_az_io_t_sas_token_8h.html" target="_top" xlink:title="Sas token class.">
 <polygon fill="white" stroke="black" points="236.5,-168.5 236.5,-187.5 329.5,-187.5 329.5,-168.5 236.5,-168.5"/>
 <text text-anchor="middle" x="283" y="-175.5" font-family="Helvetica,sans-Serif" font-size="10.00">AzIoTSasToken.h</text>
 </a>

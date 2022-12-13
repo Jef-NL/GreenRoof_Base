@@ -38,7 +38,7 @@
 <!-- Node3 -->
 <g id="node3" class="node">
 <title>Node3</title>
-<g id="a_node3"><a xlink:href="class_az_io_t_sas_token.html#af1a6552e97f47f4a0b99f46c73507526" target="_top" xlink:title=" ">
+<g id="a_node3"><a xlink:href="class_az_io_t_sas_token.html#af1a6552e97f47f4a0b99f46c73507526" target="_top" xlink:title="Generate SAS token.">
 <polygon fill="white" stroke="black" points="0,-11.5 0,-30.5 131,-30.5 131,-11.5 0,-11.5"/>
 <text text-anchor="middle" x="65.5" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">AzIoTSasToken::Generate</text>
 </a>

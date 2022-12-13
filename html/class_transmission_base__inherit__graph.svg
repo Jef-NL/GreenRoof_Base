@@ -79,22 +79,23 @@
 <g id="node4" class="node">
 <title>Node4</title>
 <g id="a_node4"><a xlink:href="class_u_d_p_transmission.html" target="_top" xlink:title="UDP / HTTP post transmission.">
-<polygon fill="white" stroke="black" points="283.5,-22.5 283.5,-112.5 399.5,-112.5 399.5,-22.5 283.5,-22.5"/>
-<text text-anchor="middle" x="341.5" y="-100.5" font-family="Helvetica,sans-Serif" font-size="10.00">UDPTransmission</text>
-<polyline fill="none" stroke="black" points="283.5,-93.5 399.5,-93.5 "/>
-<text text-anchor="start" x="291.5" y="-81.5" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; _httpClient</text>
-<polyline fill="none" stroke="black" points="283.5,-74.5 399.5,-74.5 "/>
-<text text-anchor="start" x="291.5" y="-62.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ UDPTransmission()</text>
-<text text-anchor="start" x="291.5" y="-51.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ ~UDPTransmission()</text>
-<text text-anchor="start" x="291.5" y="-40.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ transmitData()</text>
-<text text-anchor="start" x="291.5" y="-29.5" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; parseData()</text>
+<polygon fill="white" stroke="black" points="283.5,-17 283.5,-118 399.5,-118 399.5,-17 283.5,-17"/>
+<text text-anchor="middle" x="341.5" y="-106" font-family="Helvetica,sans-Serif" font-size="10.00">UDPTransmission</text>
+<polyline fill="none" stroke="black" points="283.5,-99 399.5,-99 "/>
+<text text-anchor="start" x="291.5" y="-87" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; _httpClient</text>
+<polyline fill="none" stroke="black" points="283.5,-80 399.5,-80 "/>
+<text text-anchor="start" x="291.5" y="-68" font-family="Helvetica,sans-Serif" font-size="10.00">+ UDPTransmission()</text>
+<text text-anchor="start" x="291.5" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">+ ~UDPTransmission()</text>
+<text text-anchor="start" x="291.5" y="-46" font-family="Helvetica,sans-Serif" font-size="10.00">+ transmitData()</text>
+<text text-anchor="start" x="291.5" y="-35" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; parseData()</text>
+<text text-anchor="start" x="291.5" y="-24" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; parseTime()</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node4 -->
 <g id="edge3" class="edge">
 <title>Node1&#45;&gt;Node4</title>
-<path fill="none" stroke="midnightblue" d="M257.34,-163.48C272.46,-146.42 288.5,-128.31 302.48,-112.54"/>
+<path fill="none" stroke="midnightblue" d="M257.36,-163.45C270.7,-148.4 284.75,-132.54 297.47,-118.19"/>
 <polygon fill="none" stroke="midnightblue" points="254.48,-161.43 250.47,-171.24 259.72,-166.08 254.48,-161.43"/>
 </g>
 </g>

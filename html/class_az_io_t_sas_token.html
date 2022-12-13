@@ -91,6 +91,9 @@ $(document).ready(function(){initNavTree('class_az_io_t_sas_token.html',''); ini
 </div><!--header-->
 <div class="contents">
 
+<p>SAS security token class by Microsoft.  
+ <a href="class_az_io_t_sas_token.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_az_io_t_sas_token_8h_source.html">AzIoTSasToken.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for AzIoTSasToken:</div>
@@ -101,12 +104,16 @@ Collaboration diagram for AzIoTSasToken:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ab68063a6c6394a457dbc182b880c2f66"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_az_io_t_sas_token.html#ab68063a6c6394a457dbc182b880c2f66">AzIoTSasToken</a> (az_iot_hub_client *<a class="el" href="class_az_io_t_sas_token.html#a14cfe97c82bd4598609fcb3d3e8d2722">client</a>, az_span <a class="el" href="class_az_io_t_sas_token.html#aa12ffa8d7def5d3cae29feecc42ca82d">deviceKey</a>, az_span <a class="el" href="class_az_io_t_sas_token.html#ae3c87a3a8f361692a83d5b184181ccd7">signatureBuffer</a>, az_span <a class="el" href="class_az_io_t_sas_token.html#a7be781bc8690553f11cbf8087179f056">sasTokenBuffer</a>)</td></tr>
+<tr class="memdesc:ab68063a6c6394a457dbc182b880c2f66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Az Io T Sas Token object.  <a href="class_az_io_t_sas_token.html#ab68063a6c6394a457dbc182b880c2f66">More...</a><br /></td></tr>
 <tr class="separator:ab68063a6c6394a457dbc182b880c2f66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1a6552e97f47f4a0b99f46c73507526"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_az_io_t_sas_token.html#af1a6552e97f47f4a0b99f46c73507526">Generate</a> (unsigned int expiryTimeInMinutes)</td></tr>
+<tr class="memdesc:af1a6552e97f47f4a0b99f46c73507526"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate SAS token.  <a href="class_az_io_t_sas_token.html#af1a6552e97f47f4a0b99f46c73507526">More...</a><br /></td></tr>
 <tr class="separator:af1a6552e97f47f4a0b99f46c73507526"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac03009dd73ea6f1e6d0030ed0e5fb500"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_az_io_t_sas_token.html#ac03009dd73ea6f1e6d0030ed0e5fb500">IsExpired</a> ()</td></tr>
+<tr class="memdesc:ac03009dd73ea6f1e6d0030ed0e5fb500"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get token valid.  <a href="class_az_io_t_sas_token.html#ac03009dd73ea6f1e6d0030ed0e5fb500">More...</a><br /></td></tr>
 <tr class="separator:ac03009dd73ea6f1e6d0030ed0e5fb500"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f67d4c0b1799e0ac10ca3d6ad54bad7"><td class="memItemLeft" align="right" valign="top">az_span&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_az_io_t_sas_token.html#a1f67d4c0b1799e0ac10ca3d6ad54bad7">Get</a> ()</td></tr>
+<tr class="memdesc:a1f67d4c0b1799e0ac10ca3d6ad54bad7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the sas token.  <a href="class_az_io_t_sas_token.html#a1f67d4c0b1799e0ac10ca3d6ad54bad7">More...</a><br /></td></tr>
 <tr class="separator:a1f67d4c0b1799e0ac10ca3d6ad54bad7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
@@ -124,7 +131,10 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:a358e719f25b63bb9004c9f177f26ceb9"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_az_io_t_sas_token.html#a358e719f25b63bb9004c9f177f26ceb9">expirationUnixTime</a></td></tr>
 <tr class="separator:a358e719f25b63bb9004c9f177f26ceb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>SAS security token class by Microsoft. </p>
+<p>Class taken over from example code </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ab68063a6c6394a457dbc182b880c2f66"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab68063a6c6394a457dbc182b880c2f66">&#9670;&nbsp;</a></span>AzIoTSasToken()</h2>
 
@@ -163,6 +173,17 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Construct a new Az Io T Sas Token object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">client</td><td>Client instance </td></tr>
+    <tr><td class="paramname">deviceKey</td><td>Device key string </td></tr>
+    <tr><td class="paramname">signatureBuffer</td><td>Signature string </td></tr>
+    <tr><td class="paramname">sasTokenBuffer</td><td>Token string </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -181,6 +202,15 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Generate SAS token. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">expiryTimeInMinutes</td><td>Expire time </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int Result code, 0 == Success </dd></dl>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -204,6 +234,9 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
+<p>Get the sas token. </p>
+<dl class="section return"><dt>Returns</dt><dd>az_span Token string </dd></dl>
+
 </div>
 </div>
 <a id="ac03009dd73ea6f1e6d0030ed0e5fb500"></a>
@@ -220,6 +253,11 @@ Here is the call graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get token valid. </p>
+<dl class="section return"><dt>Returns</dt><dd>true Token not valid anymore </dd>
+<dd>
+false Token is still valid </dd></dl>
 
 </div>
 </div>
@@ -243,6 +281,7 @@ Here is the call graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Client instance </p>
 
 </div>
 </div>
@@ -265,6 +304,7 @@ Here is the call graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Device key string </p>
 
 </div>
 </div>
@@ -287,6 +327,7 @@ Here is the call graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Expiration time stamp </p>
 
 </div>
 </div>
@@ -309,6 +350,7 @@ Here is the call graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Token string </p>
 
 </div>
 </div>
@@ -331,6 +373,7 @@ Here is the call graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Token string buffer </p>
 
 </div>
 </div>
@@ -353,6 +396,7 @@ Here is the call graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Signature string </p>
 
 </div>
 </div>

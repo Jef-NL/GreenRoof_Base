@@ -106,14 +106,17 @@ $(document).ready(function(){initNavTree('_u_d_p_transmission_8h_source.html',''
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    String <a class="code" href="class_u_d_p_transmission.html#ae083ab78aed1a3b8ee14c5b71e519bba">parseData</a>() <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="class_u_d_p_transmission.html#a7ec0594fb891fdccd750ccc84bf41d71">   55</a></span>&#160;    HTTPClient <a class="code" href="class_u_d_p_transmission.html#a7ec0594fb891fdccd750ccc84bf41d71">_httpClient</a>; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;};</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    String <a class="code" href="class_u_d_p_transmission.html#a613888974f346880c45ad4e558e4fd47">parseTime</a>(time_t unixTimestamp);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="class_u_d_p_transmission.html#a7ec0594fb891fdccd750ccc84bf41d71">   63</a></span>&#160;    HTTPClient <a class="code" href="class_u_d_p_transmission.html#a7ec0594fb891fdccd750ccc84bf41d71">_httpClient</a>; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;};</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aclass_u_d_p_transmission_html_ae083ab78aed1a3b8ee14c5b71e519bba"><div class="ttname"><a href="class_u_d_p_transmission.html#ae083ab78aed1a3b8ee14c5b71e519bba">UDPTransmission::parseData</a></div><div class="ttdeci">String parseData() override</div><div class="ttdoc">Prase raw data into Json.</div><div class="ttdef"><b>Definition:</b> UDPTransmission.cpp:59</div></div>
+<div class="ttc" id="aclass_u_d_p_transmission_html_a613888974f346880c45ad4e558e4fd47"><div class="ttname"><a href="class_u_d_p_transmission.html#a613888974f346880c45ad4e558e4fd47">UDPTransmission::parseTime</a></div><div class="ttdeci">String parseTime(time_t unixTimestamp)</div><div class="ttdoc">Parse time to required ISO8601 format.</div><div class="ttdef"><b>Definition:</b> UDPTransmission.cpp:92</div></div>
 <div class="ttc" id="aclass_transmission_base_html"><div class="ttname"><a href="class_transmission_base.html">TransmissionBase</a></div><div class="ttdoc">Base class for sending data to one of the endpoints.</div><div class="ttdef"><b>Definition:</b> TransmissionBase.h:20</div></div>
-<div class="ttc" id="aclass_u_d_p_transmission_html_a7ec0594fb891fdccd750ccc84bf41d71"><div class="ttname"><a href="class_u_d_p_transmission.html#a7ec0594fb891fdccd750ccc84bf41d71">UDPTransmission::_httpClient</a></div><div class="ttdeci">HTTPClient _httpClient</div><div class="ttdef"><b>Definition:</b> UDPTransmission.h:55</div></div>
+<div class="ttc" id="aclass_u_d_p_transmission_html_a7ec0594fb891fdccd750ccc84bf41d71"><div class="ttname"><a href="class_u_d_p_transmission.html#a7ec0594fb891fdccd750ccc84bf41d71">UDPTransmission::_httpClient</a></div><div class="ttdeci">HTTPClient _httpClient</div><div class="ttdef"><b>Definition:</b> UDPTransmission.h:63</div></div>
 <div class="ttc" id="a_transmission_base_8h_html"><div class="ttname"><a href="_transmission_base_8h.html">TransmissionBase.h</a></div><div class="ttdoc">Transmission base object.</div></div>
 <div class="ttc" id="astruct_data_object_html"><div class="ttname"><a href="struct_data_object.html">DataObject</a></div><div class="ttdoc">Data object.</div><div class="ttdef"><b>Definition:</b> DataObject.h:42</div></div>
 <div class="ttc" id="aclass_u_d_p_transmission_html"><div class="ttname"><a href="class_u_d_p_transmission.html">UDPTransmission</a></div><div class="ttdoc">UDP / HTTP post transmission.</div><div class="ttdef"><b>Definition:</b> UDPTransmission.h:22</div></div>
